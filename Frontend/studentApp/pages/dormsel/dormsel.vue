@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="box">
 			<view v-for="item in info" :key="item.id" class="inner_box">
-				<image :src="item.isOccupied ? '../../static/人像2.png' : '../../static/待入住.png'"></image>
+				<image :src="item.isOccupied ? '../../static/img/人像.png'  : '../../static/img/待入住.png' " id="wait" ></image>
 				<view class="right">
 					<view class="top">
 						<text :id="item.isOccupied ? 'one' : 'two'">{{ getBedText(item) }}</text>
@@ -17,6 +17,10 @@
 					</view>
 				</view>
 			</view>
+		</view>
+		<view class="my-sub-tabbar-wrapper">
+			<custom-tab-bar direction="horizontal" :show-icon="true" :selected="selectedIndex"
+				@onTabItemTap="tabbarTaped"></custom-tab-bar>
 		</view>
 	</view>
 </template>
@@ -80,7 +84,7 @@
 		flex-direction: column;
 		border-radius: 10rpx;
 		width: 95%;
-		height: 1200rpx;
+		height: 1400rpx;
 		margin-left: 2.5%;
 		margin-right: 2.5%;
 		margin-top: 15rpx;
@@ -122,6 +126,11 @@
 		flex-direction: column;
 		width: 100%;
 		height: 100%;
+		border-bottom: solid #000000 5rpx;
+	}
+	#wait{
+		width: 220rpx ;
+		height:280rpx;
 	}
 
 	#one {
@@ -175,5 +184,21 @@
 		margin-top: 5%;
 		color: #fff;
 		font-weight: bold;
+	}
+	.my-sub-tabbar-wrapper {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 96rpx;
+	}
+	
+	/deep/.uni-tabbar__icon img {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	/deep/.uni-tabbar__bd {
+		margin: 5rpx;
 	}
 </style>
