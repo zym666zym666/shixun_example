@@ -1,0 +1,90 @@
+{
+    "pages" : [
+        {
+            "path" : "pages/index/index",
+            "style" : {
+                "navigationBarTitleText" : "uni-app"
+            }
+        },
+        {
+            "path" : "pages/login/login",
+            "style" : {}
+        },
+        {
+        	"path" : "pages/register/register",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        },
+        {
+        	"path" : "pages/setpwd/setpwd",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        },
+        {
+        	"path" : "pages/datasel/datasel",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        },
+        {
+        	"path" : "pages/dorm/dorm",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        },
+        {
+        	"path" : "pages/dormsel/dormsel",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        },
+        {
+        	"path" : "pages/course/course",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        }
+    ],
+    "globalStyle" : {
+        "navigationBarTextStyle" : "black",
+        "navigationBarTitleText" : "uni-app",
+        "navigationBarBackgroundColor" : "#F8F8F8",
+        "backgroundColor" : "#F8F8F8"
+    },
+    "uniIdRouter" : {},
+	"tabBar": {
+		"selectedColor": "#00aaff",
+		"backgroundColor": "#eeeeee",
+		"color": "#6c6c6c",
+		"borderStyle": "#fff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/首页.png",
+				"selectedIconPath": "static/首页active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/message/message",
+				"iconPath": "static/消息.png",
+				"selectedIconPath": "static/消息active.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/我的.png",
+				"selectedIconPath": "static/我的active.png",
+				"text": "我的"
+			}
+			
+		]
+	}
+}

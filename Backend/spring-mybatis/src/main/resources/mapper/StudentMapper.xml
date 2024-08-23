@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 唯一命名空间标识唯一xml文件 id标识查询空间取值与StudentMapper方法对应-->
+<mapper namespace="com.example.spring_mybatis.mapper.StudentMapper">
+    <!-- 检查手机号是否存在 -->
+    <update id="checkTel" parameterType="java.lang.String">
+        UPDATE t_student
+        SET status = 1
+        WHERE TRIM(tel) = #{tel}
+    </update>
+    <!--        账户注册-->
+    <insert id="register" parameterType="java.lang.String">
+        INSERT INTO t_student (tel, `password`, status)
+        VALUES (#{tel}, #{password}, 1)
+        ON DUPLICATE KEY UPDATE `password`=VALUES(`password`), status=1;
+    </insert>
+    <!--    登录-->
+    <select id="login" parameterType="java.lang.String">
+        SELECT id,name,idcard,institute,major,classes,stu_id,tel,nation,address, `password`,image FROM t_student WHERE
+        tel=#{tel} AND `password`=#{password} AND status=1
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: spring-mybatis
+  datasource:
+    url: jdbc:mysql://localhost:3306/student?serverTimezone=UTC
+    username: root
+    password: zym20040331
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.example.spring_mybatis.pojo
+  configuration:
+    map-underscore-to-camel-case: true
