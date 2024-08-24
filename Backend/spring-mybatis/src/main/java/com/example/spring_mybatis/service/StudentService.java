@@ -6,4 +6,6 @@ public interface StudentService {
     public int register(String tel, String password);
     public Student login(String tel, String password);
     public int checkTel(String tel);
+    public int datasel(Student student);
+    public Student getInfo(String tel);
 }

@@ -100,9 +100,20 @@
 					},
 					success: (res) => {
 						if (res.data.code === 200) {
-							// 登录成功，跳转到首页
-							uni.navigateTo({
-								url: "/pages/index/index"
+							this.$store.commit('setTel', this.tel); // 更新 Vuex store 中的 tel 值
+							console.log(this.$store.getters.tel);
+							uni.showToast({
+								title: "登录成功",
+								icon: "none",
+								duration: 1000,
+								success() {
+									setTimeout(function() {
+										// 登录成功，跳转到首页
+										uni.switchTab({
+											url: "/pages/index/index"
+										});
+									}, 1000)
+								}
 							});
 						} else {
 							uni.showToast({

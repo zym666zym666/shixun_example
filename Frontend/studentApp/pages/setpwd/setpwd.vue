@@ -63,6 +63,7 @@
 					},
 					success: (res) => {
 						if (res.data.code == 200) {
+							this.$store.commit('setTel', this.tel); // 更新 Vuex store 中的 tel 值
 							uni.showToast({
 								title: "操作成功",
 								icon: "none",

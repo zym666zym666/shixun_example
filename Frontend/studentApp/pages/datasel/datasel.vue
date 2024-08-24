@@ -1,14 +1,9 @@
 <template>
 	<view class="content">
 		<view class="data-box">
-			<!-- <image src="../../static/人像1.png"></image> -->
-			<view class="image-upload">
-				<view v-if="!image" class="image-placeholder" @click="showFileInput()">
-					<text>上传人像</text>
-				</view>
-				<!-- <image v-else class="preview" :src="image"></image> -->
-				<view v-else class="image-preview" :style="{ backgroundImage: 'url(' + image + ')' }"></view>
-				<input type="file" id="imageInput" ref="imageInput" accept="image/*" @change="handleImageChange()" />
+			<view class="image-upload" @click="chooseImage">
+				<image v-if="image" :src="fullImageUrl" class="show"></image>
+				<view v-else class="hide">上传图片</view>
 			</view>
 			<view class="sub">
 				<image src="../../static/学生信息.png"></image>
@@ -82,20 +77,28 @@
 	export default {
 		data() {
 			return {
-				id: 0,
-				name: "张三",
-				idcard: "430781000000000000",
-				institute: "计算机学院",
-				major: "计科",
-				classes: "2004班",
-				stu_id: "20221010",
-				tel: "13007367562",
-				nation: "汉族",
-				address: "常德市",
-				password: "zym777777",
-				image: null,
-				status: 0,
-				selectedIndex: 0
+				// id: null,
+				tel: '',
+				name: '',
+				idcard: '',
+				institute: '',
+				major: '',
+				classes: '',
+				stu_id: '',
+				nation: '',
+				address: '',
+				image: '',
+				// password: null,
+				selectedIndex: 0,
+				status: 1,
+			}
+		},
+		computed: {
+			fullImageUrl() {
+				if (this.image) {
+					return `http://127.0.0.1:8081/file${this.image}`;
+				}
+				return "";
 			}
 		},
 		methods: {
@@ -108,60 +111,103 @@
 					url: "/" + e.pagePath
 				})
 			},
-			showFileInput() {
-				console.log('showFileInput triggered');
-				this.$nextTick(() => {
-					const inputWrapper = this.$refs.imageInput.$el;
-					const inputElement = inputWrapper.querySelector('input[type="file"]');
-					console.log('Input element found inside uni-input:', inputElement);
-					if (inputElement && typeof inputElement.click === 'function') {
-						inputElement.click();
-					} else {
-						console.error('Input element inside uni-input not found or not a function.');
+			// 点击图片选择图片
+			chooseImage() {
+				uni.chooseImage({
+					count: 1, // 默认为9，设置图片的选择数量
+					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+					success: (res) => {
+						// 成功选择图片后的回调
+						const tempFilePaths = res.tempFilePaths;
+						// 上传图片到服务器
+						this.uploadImage(tempFilePaths[0]);
+					},
+					fail: (err) => {
+						// 选择图片失败的回调
+						console.log('选择图片失败', err);
 					}
 				});
 			},
-			handleImageChange(e) {
-				console.log('Change event triggered');
-				const file = e.target.files[0];
-				console.log('Selected file:', file);
-
-				if (file) {
-					if (file.size > 2 * 1024 * 1024) { // 2MB
-						console.warn('File is too large.');
-						return;
+			// 上传图片到服务器
+			uploadImage(imagePath) {
+				uni.uploadFile({
+					url: 'http://127.0.0.1:8081/file/upload', // 服务器上传接口地址
+					filePath: imagePath, // 要上传文件资源的路径
+					name: 'file', // 必填，文件对应的 key
+					formData: {
+						// 附带的额外参数
+					},
+					success: (uploadFileRes) => {
+						// 上传成功的回调
+						const resdata = JSON.parse(uploadFileRes.data); // 假设服务器返回的是JSON格式数据
+						this.image = resdata.data; // 将返回的图片URL存储到image变量中
+						console.log(resdata.data);
+						console.log('图片上传成功', uploadFileRes);
+					},
+					fail: (uploadFileErr) => {
+						// 上传失败的回调
+						console.log('图片上传失败', uploadFileErr);
 					}
-
-					if (file.type.match('image.*')) {
-						const reader = new FileReader();
-						reader.onload = (event) => {
-							const img = new Image();
-							img.onload = () => {
-								const canvas = document.createElement('canvas');
-								const ctx = canvas.getContext('2d');
-								canvas.width = img.width;
-								canvas.height = img.height;
-								ctx.drawImage(img, 0, 0);
-								canvas.toDataURL('image/jpeg', 0.7, (dataUrl) => { // 压缩到70%质量
-									console.log('Compressed image content:', dataUrl);
-									this.image = dataUrl;
-								});
-							};
-							img.src = event.target.result;
-						};
-						reader.onerror = (error) => {
-							console.error('FileReader error:', error); // 捕获并输出读取错误
-						};
-						reader.readAsDataURL(file);
-					} else {
-						console.warn('Selected file is not an image.');
-					}
-				} else {
-					console.warn('No file selected.');
-				}
+				});
 			},
 			submit() {
-
+				if (this.tel != this.$store.getters.tel) {
+					uni.showToast({
+						title: "手机号未注册",
+						icon: "none",
+						duration: 2000
+					});
+					return;
+				}
+				const info = {
+					tel: this.tel,
+					name: this.name,
+					idcard: this.idcard,
+					institute: this.institute,
+					major: this.major,
+					classes: this.classes,
+					stuId: this.stu_id,
+					nation: this.nation,
+					address: this.address,
+					image: this.image,
+					status: this.status,
+					password: null,
+					id: null
+				};
+				uni.request({
+					url: "http://localhost:8081/datasel", // 后端接口
+					method: "POST",
+					data: info,
+					header: {
+						'Content-Type': 'application/json'
+					},
+					success: (res) => {
+						if (res.data.code === 200) {
+							uni.showToast({
+								title: "提交成功",
+								icon: "success",
+								duration: 2000
+							});
+							uni.switchTab({
+								url: "/pages/index/index"
+							});
+						} else {
+							uni.showToast({
+								title: res.data.message || "提交失败，请重试",
+								icon: "none",
+								duration: 2000
+							});
+						}
+					},
+					fail: (err) => {
+						uni.showToast({
+							title: "网络错误，请重试",
+							icon: "none",
+							duration: 2000
+						});
+					}
+				});
 			}
 		}
 	}
@@ -186,56 +232,33 @@
 	}
 
 	.image-upload {
-		width: 100%;
+		overflow: hidden;
+		width: 200rpx;
 		height: 280rpx;
 		margin-top: 10%;
 		margin-left: 35%;
-	}
-
-	.image-placeholder {
 		display: flex;
-		align-items: center;
 		justify-content: center;
-		background-color: antiquewhite;
-		width: 200rpx;
-		height: 200rpx;
-		border: 1px dashed #ccc;
-		/* 边框样式，可根据需要调整 */
-		cursor: pointer;
-		/* 鼠标悬停时显示为手形图标 */
-		background-color: #f3f3f3;
-		/* 背景色，可根据需要调整 */
+		/* 居中对齐 */
 	}
 
-	.image-preview {
-		width: 200px;
-		/* 设置宽度 */
-		height: 200px;
-		/* 设置高度 */
-		background-size: cover;
-		background-position: center;
-		border: 1px solid #ff5500;
-		/* 添加边框以便更好地调试 */
-	}
-
-
-	.preview {
-		width: 200rpx;
-		height: 200rpx;
-		background-size: cover;
-		background-position: center;
-		/* object-fit: cover; */
-		/* 确保图片覆盖整个区域而不变形 */
-	}
-
-	#imageInput {
-		/* opacity: 0; */
-		/* position: absolute; */
-		/* 		margin-top: 10rpx;
-		margin-left: 0rpx; */
+	.show {
 		width: 100%;
-		height: 20rpx;
-		cursor: pointer;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.hide {
+		width: 100%;
+		height: 100%;
+		background-color: #dadada;
+		display: flex;
+		justify-content: center;
+		/* 水平居中 */
+		align-items: center;
+		/* 垂直居中 */
+		font-weight: bold;
+		/* 加粗文字 */
 	}
 
 	.sub {

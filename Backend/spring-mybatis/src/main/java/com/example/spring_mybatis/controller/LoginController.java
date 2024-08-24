@@ -34,4 +34,25 @@ public class LoginController {
             return R.fail("检查手机号失败");
         }
     }
+
+    @PostMapping("/datasel")
+    public R datasel(@RequestBody  Student student){
+        try {
+            int done = studentService.datasel(student);
+            return R.success(done);
+        } catch (Exception e) {
+            e.printStackTrace(); // 打印异常
+            return R.fail("提交信息失败");
+        }
+    }
+    @PostMapping("/getInfo")
+    public R getInfo(@RequestParam("tel") String tel) {
+        try {
+            Student student = studentService.getInfo(tel);
+            return student != null ? R.success(student) : R.fail("信息未找到");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.fail("查询信息失败");
+        }
+    }
 }

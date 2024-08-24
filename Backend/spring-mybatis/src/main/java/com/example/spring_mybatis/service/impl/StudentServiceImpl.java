@@ -28,6 +28,13 @@ public class StudentServiceImpl implements StudentService {
     public int checkTel(String tel) {
         return studentMapper.checkTel(tel) ;
     }
-
+    @Override
+    public int datasel(Student student){
+        return studentMapper.datasel(student);
+    }
+    @Override
+    public Student getInfo(String tel){
+        return studentMapper.getInfo(tel);
+    }
 
 }
