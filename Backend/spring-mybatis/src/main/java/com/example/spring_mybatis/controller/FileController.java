@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/file")
@@ -22,9 +23,10 @@ public class FileController {
     @Value("${files.upload.path}")
     private String fileUploadPath;
     @Value("${files.upload.fileMapper}")
-    private String fileMapper;   //图标映射路径
+    private String fileMapper;   // 文件映射路径
     @Autowired
     private ServletContext servletContext;
+
     /**
      * 文件上传
      * @param file
@@ -32,48 +34,67 @@ public class FileController {
      * @throws IOException
      */
     @PostMapping("/upload")
-
     public R upload(@RequestParam MultipartFile file) throws IOException {
-        //获取文件名
+        // 获取项目根目录路径
+        String rootPath = System.getProperty("user.dir");
+        // 生成绝对路径
+        String absolutePath = rootPath + File.separator + fileUploadPath;
+
+        // 获取文件名
         String originalFilename = file.getOriginalFilename();
-        //获取文件的后缀（类型）
+        // 获取文件的后缀（类型）
         String fileType = FileUtil.extName(originalFilename);
-        long size = file.getSize();//文件大小
-//将文件先存储到磁盘
-        File uploadParentFile = new File(fileUploadPath);
-        //判断存储文件的目录是否存在，不存在则创建
+
+        // 将文件先存储到磁盘
+        File uploadParentFile = new File(absolutePath);
+        // 判断存储文件的目录是否存在，不存在则创建
         if (!uploadParentFile.exists()){
             uploadParentFile.mkdirs();
         }
-        //定义唯一标识码，从新命名文件
+
+        // 定义唯一标识码，重新命名文件
         String uuid = IdUtil.fastSimpleUUID();
-        String fileName = uuid+ StrUtil.DOT+fileType;
-        //文件路径与下载接口路径一样
+        String fileName = uuid + StrUtil.DOT + fileType;
+        // 文件路径与下载接口路径一样
         String url = fileMapper + fileName;
-        //将文件写入磁盘
-        File uploadFile = new File(fileUploadPath + fileName);
+
+        // 将文件写入磁盘
+        File uploadFile = new File(absolutePath + File.separator + fileName);
         file.transferTo(uploadFile);
+
         return R.success(url);
     }
+
     @GetMapping("/download/{fileUUID}")
-    public void downLoad(@PathVariable String fileUUID, HttpServletResponse
-            response) throws IOException {
-        //根据文件标识码获取文件
-        File file = new File(fileUploadPath + fileUUID);
-        //设置输出流对象
+    public void downLoad(@PathVariable String fileUUID, HttpServletResponse response) throws IOException {
+        // 获取项目根目录路径
+        String rootPath = System.getProperty("user.dir");
+        // 生成绝对路径
+        String absolutePath = rootPath + File.separator + fileUploadPath;
+
+        // 根据文件标识码获取文件
+        File file = new File(absolutePath + File.separator + fileUUID);
+
+        // 设置输出流对象
         ServletOutputStream os = response.getOutputStream();
-        response.addHeader("Context-Disposition","attachment;filename="+
-                URLEncoder.encode(fileUUID,"UTF-8"));
+        response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileUUID, "UTF-8"));
         response.setContentType("application/octet-stream");
-        //读取字节流
+
+        // 读取字节流
         os.write(FileUtil.readBytes(file));
         os.flush();
         os.close();
     }
+
     @GetMapping("/profile/{fileUUID}")
     public void viewImage(@PathVariable String fileUUID, HttpServletResponse response) throws IOException {
+        // 获取项目根目录路径
+        String rootPath = System.getProperty("user.dir");
+        // 生成绝对路径
+        String absolutePath = rootPath + File.separator + fileUploadPath;
+
         // 生成文件路径
-        File file = new File(fileUploadPath + fileUUID);
+        File file = new File(absolutePath + File.separator + fileUUID);
 
         if (!file.exists()) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);

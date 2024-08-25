@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
 import java.util.concurrent.Executors;
 
 @Configuration
@@ -50,7 +51,12 @@ public class WebConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // 获取项目根目录
+        String rootPath = System.getProperty("user.dir");
+        // 拼接成绝对路径
+        String absolutePath = "file:" + rootPath + File.separator + fileUploadPath;
 
-        registry.addResourceHandler(fileMapper + "**").addResourceLocations("file" + fileUploadPath);
+        registry.addResourceHandler(fileMapper + "**")
+                .addResourceLocations(absolutePath);
     }
 }

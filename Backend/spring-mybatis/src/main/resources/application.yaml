@@ -16,5 +16,5 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 files:
     upload:
-      path: 'C:\Users\Lenovo\Pictures\Screenshots\myown\' # 文件上传路径
+      path: './uploads/' # 文件上传路径
       fileMapper: '/profile/'  # 文件映射路径
