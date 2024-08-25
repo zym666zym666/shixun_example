@@ -23,6 +23,10 @@
 				<text>{{course.coursePlace}}</text>
 			</view>
 		</view>
+		<view class="my-sub-tabbar-wrapper">
+			<custom-tab-bar direction="horizontal" :show-icon="true" :selected="selectedIndex"
+				@onTabItemTap="tabbarTaped"></custom-tab-bar>
+		</view>
 	</view>
 </template>
 
@@ -96,8 +100,24 @@
 		margin-left: 40rpx;
 		border-bottom: #d5d5d5 solid 1rpx;
 	}
-	.course_box1 text{
+.course_box1 text{
 		line-height: 100rpx;
 		font-size: 25rpx;
 	}
+.my-sub-tabbar-wrapper{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 96rpx;
+		}
+		
+	/deep/.uni-tabbar__icon img{
+			width: 50rpx;
+			height: 50rpx;
+		}
+		
+	/deep/.uni-tabbar__bd{
+			margin: 5rpx;
+		}
 </style>

@@ -275,11 +275,13 @@
 			width: 100%;
 			height: 96rpx;
 		}
-		/deep/.uni-tabbar__icon img{
+		
+	/deep/.uni-tabbar__icon img{
 			width: 50rpx;
 			height: 50rpx;
 		}
-		/deep/.uni-tabbar__bd{
+		
+	/deep/.uni-tabbar__bd{
 			margin: 5rpx;
 		}
 </style>
