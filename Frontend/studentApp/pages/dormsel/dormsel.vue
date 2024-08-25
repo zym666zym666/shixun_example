@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<view class="box">
-			<view v-for="item in info" :key="item.id" class="inner_box">
-				<image :src="item.isOccupied ? '../../static/img/人像.png'  : '../../static/img/待入住.png' " id="wait" ></image>
+			<view v-for="item in info" :key="item.id" class="inner_box" @click="handleClick(item)">
+				<image :src="item.isOccupied ? '../../static/img/人像.png' : '../../static/img/待入住.png'" id="wait" ></image>
 				<view class="right">
 					<view class="top">
 						<text :id="item.isOccupied ? 'one' : 'two'">{{ getBedText(item) }}</text>
@@ -18,6 +18,22 @@
 				</view>
 			</view>
 		</view>
+
+		<!-- 弹窗 -->
+		<view v-if="showModal" class="modal">
+			<view class="modal-content">
+				<text>填写入住信息</text>
+				<input v-model="formData.name" placeholder="姓名" />
+				<input v-model="formData.tel" placeholder="手机号码" />
+				<input v-model="formData.major" placeholder="专业" />
+				<input v-model="formData.addr" placeholder="籍贯" />
+				<view class="modal-footer">
+					<button @click="submitForm">提交</button>
+					<button @click="closeModal">取消</button>
+				</view>
+			</view>
+		</view>
+
 		<view class="my-sub-tabbar-wrapper">
 			<custom-tab-bar direction="horizontal" :show-icon="true" :selected="selectedIndex"
 				@onTabItemTap="tabbarTaped"></custom-tab-bar>
@@ -29,16 +45,16 @@
 	export default {
 		data() {
 			return {
-				info: [{
+				info: [
+					{
 						id: 1,
-						name: "张琪",
-						tel: "13456",
-						major: "计算机科学与技术",
-						addr: "常德市",
-						isOccupied: true
+						name: "待入住",
+						tel: "",
+						major: "",
+						addr: "",
+						isOccupied: false
 					},
 					{
-						// 假设这是2号床位的数据，待入住
 						id: 2,
 						name: "待入住",
 						tel: "",
@@ -47,31 +63,76 @@
 						isOccupied: false
 					},
 					{
-						id: 1,
-						name: "张琪",
-						tel: "13456",
-						major: "计算机科学与技术",
-						addr: "常德市",
-						isOccupied: true
+						id: 3,
+						name: "待入住",
+						tel: "",
+						major: "",
+						addr: "",
+						isOccupied: false
 					},
 					{
-						id: 1,
-						name: "张琪",
-						tel: "13456",
-						major: "计算机科学与技术",
-						addr: "常德市",
-						isOccupied: true
+						id: 4,
+						name: "待入住",
+						tel: "",
+						major: "",
+						addr: "",
+						isOccupied: false
 					}
-				]
+				],
+				showModal: false,
+				selectedBed: null,
+				formData: {
+					name: '',
+					tel: '',
+					major: '',
+					addr: ''
+				}
 			}
 		},
 		methods: {
 			getBedText(item) {
 				return item.isOccupied ? `${item.id}号床位 ${item.name}` : `${item.id}号床位 待入住`;
+			},
+			handleClick(item) {
+				if (!item.isOccupied) {
+					this.selectedBed = item.id;
+					this.showModal = true;
+				}
+			},
+			closeModal() {
+				this.showModal = false;
+			},
+			submitForm() {
+				// 构建要发送到后端的请求数据
+				const newBedData = {
+					id: this.selectedBed,
+					name: this.formData.name,
+					tel: this.formData.tel,
+					major: this.formData.major,
+					addr: this.formData.addr,
+					isOccupied: true
+				};
+
+				// 发送POST请求到后端API
+				axios.post("http://127.0.0.1:8088/DormStu", newBedData)
+					.then(response => {
+						console.log(response.data);
+						// 更新前端数据
+						const index = this.info.findIndex(item => item.id === this.selectedBed);
+						if (index !== -1) {
+							this.$set(this.info, index, newBedData);
+						}
+						this.closeModal();
+					})
+					.catch(error => {
+						console.error("Error submitting form:", error);
+					});
 			}
 		}
 	}
+	
 </script>
+
 
 <style>
 	.content {
@@ -200,5 +261,28 @@
 	
 	/deep/.uni-tabbar__bd {
 		margin: 5rpx;
+	}
+	/* 弹窗样式 */
+	.modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.modal-content {
+		background-color: white;
+		padding: 20px;
+		border-radius: 10px;
+		width: 300px;
+	}
+	.modal-footer {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
 	}
 </style>

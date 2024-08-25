@@ -1,22 +1,32 @@
-import App from './App'
-
-// #ifndef VUE3
-import Vue from 'vue'
-import './uni.promisify.adaptor'
-Vue.config.productionTip = false
-App.mpType = 'app'
-const app = new Vue({
-  ...App
-})
-app.$mount()
-// #endif
-
-// #ifdef VUE3
-import { createSSRApp } from 'vue'
+import {
+	createSSRApp
+} from 'vue'
+import App from './App.vue'
+import {
+	createStore
+} from 'vuex'; //新增全局状态的存储工具
+// 创建 Vuex store
+const store = createStore({
+	state() {
+		return {
+			tel: '' // 你需要存储的全局状态
+		};
+	},
+	mutations: {
+		setTel(state, tel) {
+			state.tel = tel;
+		}
+	},
+	getters: {
+		tel(state) {
+			return state.tel;
+		}
+	}
+});
 export function createApp() {
-  const app = createSSRApp(App)
-  return {
-    app
-  }
+	const app = createSSRApp(App)
+	app.use(store); // 使用 Vuex store
+	return {
+		app
+	}
 }
-// #endif

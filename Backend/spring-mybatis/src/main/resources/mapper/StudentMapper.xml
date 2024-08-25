@@ -21,4 +21,37 @@
         SELECT id,name,idcard,institute,major,classes,stu_id,tel,nation,address, `password`,image FROM t_student WHERE
         tel=#{tel} AND `password`=#{password} AND status=1
     </select>
+    <!--    更新个人信息-->
+    <insert id="datasel" parameterType="Student">
+        INSERT INTO t_student (tel, name, idcard, institute, major, classes, stu_id, nation, address, image, status)
+        VALUES (#{tel}, #{name}, #{idcard}, #{institute}, #{major}, #{classes}, #{stuId}, #{nation}, #{address}, #{image}, 1)
+        ON DUPLICATE KEY UPDATE
+        name = VALUES(name),
+        idcard = VALUES(idcard),
+        institute = VALUES(institute),
+        major = VALUES(major),
+        classes = VALUES(classes),
+        stu_id = VALUES(stu_id),
+        nation = VALUES(nation),
+        address = VALUES(address),
+        image = VALUES(image),
+        status = 1;
+    </insert>
+    <!-- 日期插入到 checkin_info 表中 -->
+    <insert id="insertDate">
+        INSERT INTO checkin_info (tel, `date`)
+        VALUES (#{tel}, CURDATE())
+        ON DUPLICATE KEY UPDATE `date` = VALUES(`date`);
+    </insert>
+<!--    获取当天报道人数-->
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM checkin_info
+        WHERE `date` = CURDATE();
+    </select>
+<!--    获取当前批次报到人数-->
+    <select id="getBatch" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM checkin_info
+    </select>
 </mapper>
