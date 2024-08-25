@@ -54,4 +54,10 @@
         SELECT COUNT(*) AS count
         FROM checkin_info
     </select>
+<!--    获取各系人数-->
+    <select id="getInsCnt" resultType="map">
+        SELECT institute, COUNT(*) AS student_count
+        FROM t_student
+        GROUP BY institute
+    </select>
 </mapper>

@@ -1,6 +1,9 @@
 package com.example.spring_mybatis.service;
 
 import com.example.spring_mybatis.pojo.Student;
+
+import java.util.List;
+
 //业务逻辑接口层
 public interface StudentService {
     public int register(String tel, String password);
@@ -11,4 +14,5 @@ public interface StudentService {
     public int insertDate(String tel);
     public int getCount();
     public int getBatch();
+    public List getInsCnt();
 }

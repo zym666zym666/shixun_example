@@ -6,6 +6,10 @@ import com.example.spring_mybatis.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.io.IOException;
+import java.util.Map;
+
 //控制类 接收前端发送的请求并处理请求，调用业务逻辑接口层，返回json格式
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -76,5 +80,19 @@ public class LoginController {
             e.printStackTrace();
             return R.fail("查询信息失败");
         }
+    }
+
+
+//    获取各个学院人数
+    @GetMapping("/getInsCnt")
+    public R getInsCnt() {
+        try{
+            List<Map<String,Object>>  insCnt = studentService.getInsCnt();
+            return R.success(insCnt);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return R.fail("查询信息失败");
+        }
+
     }
 }

@@ -4,6 +4,8 @@ import com.example.spring_mybatis.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 //数据访问持久层
 @Mapper
 public interface StudentMapper {
@@ -24,5 +26,7 @@ public interface StudentMapper {
     public int getCount();
 //获取当前批次报道人数
     public int getBatch();
+//获取各系人数
+    public List getInsCnt();
 }
 
