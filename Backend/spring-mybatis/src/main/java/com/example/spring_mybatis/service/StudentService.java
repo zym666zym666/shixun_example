@@ -15,4 +15,5 @@ public interface StudentService {
     public int getCount();
     public int getBatch();
     public List getInsCnt();
+    public float getRate();
 }

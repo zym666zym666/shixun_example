@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 唯一命名空间标识唯一xml文件 id标识查询空间取值与StudentMapper方法对应-->
+<mapper namespace="com.example.spring_mybatis.mapper.NoticeMapper">
+<!--    发布通知-->
+    <insert id="insert" parameterType="Notice">
+        insert into t_notice(title,content,date)value (#{title},#{content},#{date})
+    </insert>
+    <update id="update" parameterType="Notice">
+        update t_notice
+        <set>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="content!=null and content!=''">
+                content=#{content},
+            </if>
+            <if test="date!=null">
+                date=#{date}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+<!--    删除通知-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from t_notice where id=#{id}
+    </delete>
+<!--    查询通知-->
+    <select id="query" resultType="Notice">
+        select id,title,content,date from t_notice
+    </select>
+</mapper>

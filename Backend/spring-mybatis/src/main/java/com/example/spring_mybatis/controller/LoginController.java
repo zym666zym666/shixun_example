@@ -95,4 +95,15 @@ public class LoginController {
         }
 
     }
+//    获取报到人数比例
+@GetMapping("/getRate")
+public R getRate() {
+    try{
+        float res = studentService.getRate();
+        return R.success(res);
+    }catch (Exception e) {
+        e.printStackTrace();
+        return R.fail("查询信息失败");
+    }
+}
 }

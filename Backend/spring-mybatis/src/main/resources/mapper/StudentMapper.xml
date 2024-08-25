@@ -60,4 +60,9 @@
         FROM t_student
         GROUP BY institute
     </select>
+<!--    获取报到比例-->
+    <select id="getRate" resultType="java.math.BigDecimal">
+        SELECT ROUND((COUNT(CASE WHEN status = 1 THEN 1 END) * 1.0 / COUNT(*)), 4) AS ratio
+        FROM t_student
+    </select>
 </mapper>

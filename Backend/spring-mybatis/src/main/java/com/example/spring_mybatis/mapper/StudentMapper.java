@@ -4,6 +4,7 @@ import com.example.spring_mybatis.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 //数据访问持久层
@@ -28,5 +29,7 @@ public interface StudentMapper {
     public int getBatch();
 //获取各系人数
     public List getInsCnt();
+//    获取报到比例
+    public BigDecimal getRate();
 }
 

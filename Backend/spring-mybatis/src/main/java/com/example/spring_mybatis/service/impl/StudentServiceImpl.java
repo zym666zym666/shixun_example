@@ -6,7 +6,7 @@ import com.example.spring_mybatis.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -64,6 +64,13 @@ public class StudentServiceImpl implements StudentService {
             row.put("student_count", ((Number) row.get("student_count")).intValue());
             return row;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public float getRate() {
+        BigDecimal ratio =studentMapper.getRate();
+        float ratioFloat = ratio.floatValue();
+        return ratioFloat;
     }
 
 }
