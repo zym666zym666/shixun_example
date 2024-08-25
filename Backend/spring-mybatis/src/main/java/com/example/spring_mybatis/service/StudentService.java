@@ -8,4 +8,7 @@ public interface StudentService {
     public int checkTel(String tel);
     public int datasel(Student student);
     public Student getInfo(String tel);
+    public int insertDate(String tel);
+    public int getCount();
+    public int getBatch();
 }

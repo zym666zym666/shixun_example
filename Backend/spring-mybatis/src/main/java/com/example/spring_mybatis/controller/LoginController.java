@@ -55,4 +55,26 @@ public class LoginController {
             return R.fail("查询信息失败");
         }
     }
+//    获取当天报道人数
+    @GetMapping("/getCount")
+    public R getCount() {
+        try {
+            int count = studentService.getCount();
+            return R.success(count);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.fail("查询信息失败");
+        }
+    }
+//    当前批次已报到
+    @GetMapping("/getBatch")
+    public R getbatch() {
+        try {
+            int count = studentService.getBatch();
+            return R.success(count);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.fail("查询信息失败");
+        }
+    }
 }

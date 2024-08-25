@@ -37,4 +37,21 @@
         image = VALUES(image),
         status = 1;
     </insert>
+    <!-- 日期插入到 checkin_info 表中 -->
+    <insert id="insertDate">
+        INSERT INTO checkin_info (tel, `date`)
+        VALUES (#{tel}, CURDATE())
+        ON DUPLICATE KEY UPDATE `date` = VALUES(`date`);
+    </insert>
+<!--    获取当天报道人数-->
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM checkin_info
+        WHERE `date` = CURDATE();
+    </select>
+<!--    获取当前批次报到人数-->
+    <select id="getBatch" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM checkin_info
+    </select>
 </mapper>

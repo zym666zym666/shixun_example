@@ -18,4 +18,11 @@ public interface StudentMapper {
 //    查询信息
     @Select("SELECT * FROM t_student WHERE tel = #{tel}")
     public Student getInfo(String tel);
+//    添加报到时间
+    public int insertDate(String tel);
+//    获取当天报道人数
+    public int getCount();
+//获取当前批次报道人数
+    public int getBatch();
 }
+
