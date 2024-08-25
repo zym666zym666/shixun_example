@@ -5,7 +5,7 @@
 		<view class="phone-box">
 			<text id="phone_title">+86</text>
 			<image src="../../static/sjx.png"></image>
-			<input v-model="tel" name="tel" type="text" placeholder="请输入手机号" />
+			<input v-model="tel" name="tel" type="text" placeholder="请输入密码" />
 		</view>
 		<button class="btn" @click="activate()">同意并激活账号</button>
 		<view class="bottom">

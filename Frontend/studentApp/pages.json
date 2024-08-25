@@ -49,6 +49,17 @@
         {
             "path" : "pages/mycourse/mycourse",
             "style" : {}
+        },
+        {
+            "path" : "pages/my/my",
+            "style" : {}
+        },
+        {
+        	"path" : "pages/message/message",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
         }
     ],
     "globalStyle" : {
