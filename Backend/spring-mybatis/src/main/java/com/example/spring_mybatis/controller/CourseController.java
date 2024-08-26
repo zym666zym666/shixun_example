@@ -33,7 +33,7 @@ public class CourseController {
     }
 
     //选课功能
-    @PostMapping("/Course")
+    @PostMapping("/SelectCourse")
     public R courseSelection(String phone,Integer courseId)
     {
         System.out.println(phone+" "+courseId);
@@ -85,7 +85,7 @@ public class CourseController {
     }
 
     //显示我的课程
-    @GetMapping("/mycourse")
+    @GetMapping("/Mycourse")
     public R Query(String phone)
     {
         Integer res=studentService.queryId(phone);
