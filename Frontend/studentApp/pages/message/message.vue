@@ -17,8 +17,11 @@
 	export default {
 		data() {
 			return {
-				
+				notices:[],
 			}
+		},
+		onLoad(){
+			this.Autodisp();
 		},
 		methods: {
 			Autodisp()
@@ -29,7 +32,7 @@
 					dataType:"json",
 					success: (res) => {
 						this.notices=res.data.data;
-					},
+					}
 				})
 			},
 			Tospecific(id)
