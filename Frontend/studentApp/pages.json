@@ -67,7 +67,14 @@
         	{
         		"navigationBarTitleText" : ""
         	}
-        }
+        },
+		{
+			"path" :"pages/onlineService/onlineService",
+			"style" :
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
     ],
     "globalStyle" : {
         "navigationBarTextStyle" : "black",

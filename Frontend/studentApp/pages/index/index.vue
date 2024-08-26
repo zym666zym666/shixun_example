@@ -12,7 +12,7 @@
 				<image src="../../static/数据采集.png"></image>
 				<text>数据采集</text>
 			</view>
-			<view class="nav-item">
+			<view class="nav-item" @click="toService()">
 				<image src="../../static/咨询.png"></image>
 				<text>在线咨询</text>
 			</view>
@@ -121,7 +121,12 @@
 					url: "/pages/course/course"
 				})
 			},
-			
+			toService:function()
+			{
+				uni.navigateTo({
+					url:"/pages/onlineService/onlineService"
+				})
+			}
 		},
 		created() {
 			// 在组件创建时，将 Vuex store 中的值赋给组件的 data
