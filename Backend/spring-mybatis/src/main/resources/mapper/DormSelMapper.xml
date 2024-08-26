@@ -17,7 +17,7 @@ id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的�
     <!--查询学生信息-->
     <select id="getMessage" parameterType="java.lang.String">
         select * from t_student
-        where tel=#{phone}
+        where phone=#{phone}
     </select>
 
     <!--查询宿舍信息，显示在前端-->
