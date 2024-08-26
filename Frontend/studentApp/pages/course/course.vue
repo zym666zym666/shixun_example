@@ -60,7 +60,7 @@
 		methods: {
 			AutoDisplay() {
 				uni.request({
-					url: "http://127.0.0.1:8088/course",
+					url: "http://127.0.0.1:8081/course",
 					method: "GET",
 					dataType: "json",
 					success: (res) => {
@@ -88,7 +88,7 @@
 				console.log(item);
 				console.log(course.courseId);
 				uni.request({
-					url: "http://127.0.0.1:8088/SelectCourse?phone=" + item + "&courseId=" + course.courseId,
+					url: "http://127.0.0.1:8081/SelectCourse?phone=" + item + "&courseId=" + course.courseId,
 					method: "POST",
 
 
@@ -138,7 +138,7 @@
 				const it = this.$store.getters.tel;
 				console.log(it);
 				uni.request({
-					url: "http://127.0.0.1:8088/Dropcourse?phone=" + it + "&courseId=" + course.courseId,
+					url: "http://127.0.0.1:8081/Dropcourse?phone=" + it + "&courseId=" + course.courseId,
 					method: "POST",
 					dataType: "json",
 					success: (res) => {

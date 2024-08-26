@@ -17,18 +17,14 @@
 	export default {
 		data() {
 			return {
-				notices:[],
+				
 			}
-		},
-		onLoad()
-		{
-			this.Autodisp();
 		},
 		methods: {
 			Autodisp()
 			{
 				uni.request({
-					url:"http://127.0.0.1:8088/notice",
+					url:"http://127.0.0.1:8081/notice",
 					method:"GET",
 					dataType:"json",
 					success: (res) => {

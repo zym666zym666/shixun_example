@@ -6,10 +6,7 @@ import com.example.spring_mybatis.service.CourseStudentService;
 import com.example.spring_mybatis.service.StudentService;
 import com.example.spring_mybatis.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class CourseController {
 
     //选课功能
     @PostMapping("/SelectCourse")
-    public R courseSelection(String phone,Integer courseId)
+    public R courseSelection(@RequestParam("phone") String phone, @RequestParam("courseId") Integer courseId)
     {
         System.out.println(phone+" "+courseId);
         //根据电话号码查询学生id,并将其保存在res中

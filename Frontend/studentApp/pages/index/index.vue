@@ -127,7 +127,17 @@
 			// 在组件创建时，将 Vuex store 中的值赋给组件的 data
 			this.tel = this.$store.getters.tel;
 		},
-	
+		Autodisp()
+		{
+			uni.request({
+				url:"http://127.0.0.1:8081/notice",
+				method:"GET",
+				dataType:"json",
+				success: (res) => {
+					this.notices=res.data.data;
+				}
+			})
+		}
 	}
 </script>
 
