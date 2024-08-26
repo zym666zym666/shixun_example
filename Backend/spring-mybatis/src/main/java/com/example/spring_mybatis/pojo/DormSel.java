@@ -1,4 +1,4 @@
-package com.cquetc.student_backed.pojo;
+package com.example.spring_mybatis.pojo;
 
 import lombok.Data;
 

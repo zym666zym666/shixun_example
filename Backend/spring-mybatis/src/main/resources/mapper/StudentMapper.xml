@@ -39,9 +39,8 @@
     </insert>
     <!-- 日期插入到 checkin_info 表中 -->
     <insert id="insertDate">
-        INSERT INTO checkin_info (tel, `date`)
-        VALUES (#{tel}, CURDATE())
-        ON DUPLICATE KEY UPDATE `date` = VALUES(`date`);
+        INSERT IGNORE INTO checkin_info (tel, `date`)
+        VALUES (#{tel}, CURDATE());
     </insert>
 <!--    获取当天报道人数-->
     <select id="getCount" resultType="int">
@@ -68,6 +67,6 @@
     <select id="queryId" parameterType="java.lang.String">
         select id
         from t_student
-        where phone=#{phone}
+        where tel=#{phone}
     </select>
 </mapper>

@@ -47,7 +47,7 @@
 					const it=this.$store.getters.tel;//学生电话号码
 					console.log(it);
 					uni.request({
-						url:"http://127.0.0.1:8088/Mycourse?phone="+it,
+						url:"http://127.0.0.1:8081/Mycourse?phone="+it,
 						method:'GET',
 						dataType:"json",
 						success: (res) => {

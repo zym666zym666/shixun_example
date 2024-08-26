@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="box">
 			<view v-for="(item,index) in info" :key="item.id" class="inner_box" @click="handleClick(item,index)">
-				<image :src="item.isOccupied ? `http://127.0.0.1:8088/file${this.stuImg}` : '../../static/待入住.png'" id="wait" ></image>
+				<image :src="item.isOccupied ? `http://127.0.0.1:8081/file${this.stuImg}` : '../../static/待入住.png'" id="wait" ></image>
 				<view class="right">
 					<view class="top">
 						<text :id="item.isOccupied ? 'one' : 'two'">{{ getBedText(item) }}</text>
@@ -22,9 +22,9 @@
 		<!-- 弹窗 -->
 		<view v-if="showModal" class="modal">
 			<view class="modal-content">
-				<text>填写入住信息</text>
+				<text>是否确认入住</text>
 				<view class="modal-footer">
-					<button @click="submitForm">提交</button>
+					<button @click="submitForm">确认</button>
 					<button @click="closeModal">取消</button>
 				</view>
 			</view>
@@ -42,7 +42,7 @@
 	  data() {
 	    return {
 	      info: [],
-		  phone:"19562228497",
+		  phone:"",
 		  buildingId: "",
 		  bunk: "",
 		  status: "",
@@ -52,6 +52,7 @@
 		  stuImg: "",
 		  stuNation: "",
 	      showModal: false,
+		  // selectedIndex:0
 	    };
 	  },
 	  created() {
@@ -77,8 +78,9 @@
 		},
 		//获取学生信息，传到this.data中
 		getStu(phone){
+			this.phone=this.$store.getters.tel;
 			uni.request({
-				url:"http://127.0.0.1:8088/getStu",
+				url:"http://127.0.0.1:8081/getStu",
 				method:"GET",
 				dataType:"json",
 				data:{
@@ -88,18 +90,13 @@
 					/* console.log(res.data.data) */
 				  if (res.data.code === 200) {
 				    // 使用等号进行赋值
-				    this.stuName = res.data.data.stuName;
-				    this.stuPhone = res.data.data.phone;
+				    this.stuName = res.data.data.name;
+				    this.stuPhone = res.data.data.tel;
 				    this.stuMajor = res.data.data.major;
 				    this.stuImg = res.data.data.image;
 				    this.stuNation = res.data.data.nation;
 				  } else {
 				    // 使用 uni 框架的 showToast 函数显示加载失败的提示
-				    uni.showToast({
-				      title: "信息加载失败",
-				      icon: "none",
-				      duration: 2000 // 显示时长为2000毫秒
-				    });
 				  }
 				},
 			})
@@ -108,7 +105,7 @@
 		submitForm(){
 			/* console.log(this.stuName); */
 			uni.request({
-				url:"http://127.0.0.1:8088/stay",
+				url:"http://127.0.0.1:8081/stay",
 				method:"POST",
 				dataType:"json",
 				data:{
@@ -145,7 +142,7 @@
 		
 		//从数据库中调出宿舍床位信息
 	    fetchBedsData(buildingId){
-	      axios.get('http://127.0.0.1:8088/getDorm', {
+	      axios.get('http://127.0.0.1:8081/getDorm', {
 	          params: {
 	            buildingId: this.buildingId
 	          }

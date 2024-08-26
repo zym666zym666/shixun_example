@@ -1,9 +1,9 @@
-package com.cquetc.student_backed.service.impl;
+package com.example.spring_mybatis.service.impl;
 
-import com.cquetc.student_backed.mapper.DormSelMapper;
-import com.cquetc.student_backed.pojo.DormSel;
-import com.cquetc.student_backed.pojo.Student;
-import com.cquetc.student_backed.service.DormSelService;
+import com.example.spring_mybatis.mapper.DormSelMapper;
+import com.example.spring_mybatis.pojo.DormSel;
+import com.example.spring_mybatis.pojo.Student;
+import com.example.spring_mybatis.service.DormSelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

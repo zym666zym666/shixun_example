@@ -1,9 +1,9 @@
-package com.cquetc.student_backed.controller;
+package com.example.spring_mybatis.controller;
 
-import com.cquetc.student_backed.pojo.DormSel;
-import com.cquetc.student_backed.pojo.Student;
-import com.cquetc.student_backed.service.DormSelService;
-import com.cquetc.student_backed.utils.R;
+import com.example.spring_mybatis.pojo.DormSel;
+import com.example.spring_mybatis.pojo.Student;
+import com.example.spring_mybatis.service.DormSelService;
+import com.example.spring_mybatis.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
-package com.cquetc.student_backed.mapper;
+package com.example.spring_mybatis.mapper;
 
-import com.cquetc.student_backed.pojo.DormSel;
-import com.cquetc.student_backed.pojo.Student;
+import com.example.spring_mybatis.pojo.DormSel;
+import com.example.spring_mybatis.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

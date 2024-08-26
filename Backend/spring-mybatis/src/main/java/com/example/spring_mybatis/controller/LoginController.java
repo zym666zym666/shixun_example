@@ -12,7 +12,7 @@ import java.util.Map;
 
 //控制类 接收前端发送的请求并处理请求，调用业务逻辑接口层，返回json格式
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class LoginController {
 //   注入业务逻辑接口层实例对象
     @Autowired
