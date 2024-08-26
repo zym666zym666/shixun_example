@@ -73,4 +73,9 @@ public class StudentServiceImpl implements StudentService {
         return ratioFloat;
     }
 
+    @Override
+    public Integer queryId(String phone)
+    {
+        return studentMapper.queryId(phone);
+    }
 }

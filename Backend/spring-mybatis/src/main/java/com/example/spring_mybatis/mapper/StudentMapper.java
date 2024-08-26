@@ -31,5 +31,8 @@ public interface StudentMapper {
     public List getInsCnt();
 //    获取报到比例
     public BigDecimal getRate();
+// 根据学生手机号查询学生id
+public Integer queryId(String phone);
+
 }
 

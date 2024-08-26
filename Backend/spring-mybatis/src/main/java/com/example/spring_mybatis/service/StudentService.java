@@ -16,4 +16,5 @@ public interface StudentService {
     public int getBatch();
     public List getInsCnt();
     public float getRate();
+    public Integer queryId(String phone);
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 唯一命名空间标识唯一xml文件 id标识查询空间取值与StudentMapper方法对应-->
+<mapper namespace="com.example.spring_mybatis.mapper.CourseMapper">
+    <select id="queryall">
+        select *
+        from course
+    </select>
+    <select id="isCourseFull" parameterType="int">
+        select count(*)
+        from course
+        where course_id=#{course_id} and course_capacity>course_number
+    </select>
+    <update id="courseInsert" parameterType="int">
+        UPDATE course
+        SET course_number = course_number + 1
+        WHERE course_id =#{course_id}
+    </update>
+    <update id="courseDrop" parameterType="int">
+        UPDATE course
+        SET course_number = course_number - 1
+        WHERE course_id =#{course_id}
+    </update>
+    <select id="queryBasedOnStudentID" parameterType="int">
+        select *
+        from course
+        where course_id in (select Course_id
+        from course_student
+        where Student_id=#{student_id})
+    </select>
+</mapper>
