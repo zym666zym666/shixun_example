@@ -43,11 +43,11 @@
 		</view>
 		<text class="message">最新消息</text>
 		<view class="message-box">
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
+			<view class="msg-content" v-for="notice in notices" :key="notice.id">
+				<text class="msg-title">{{notice.title}}</text>
+				<text class="msg-date">{{notice.content}}</text>
 			</view>
-			<view class="msg-content">
+			<!-- <view class="msg-content">
 				<text class="msg-title">关于23学年学生新生报到通知...</text>
 				<text class="msg-date">2024-8-18</text>
 			</view>
@@ -62,7 +62,7 @@
 			<view class="msg-content">
 				<text class="msg-title">关于学生新生报到通知...</text>
 				<text class="msg-date">2024-8-18</text>
-			</view>
+			</view> -->
 		</view>
 	</view>
 
@@ -82,8 +82,13 @@
 					id: 3,
 					url: "../../static/banner3.png"
 				}],
-				tel: ""
+				tel: "",
+				notices:[],
 			}
+		},
+		onLoad()
+		{
+			this.Autodisp();
 		},
 		methods: {
 			tabbarSelected(e) {
@@ -114,6 +119,17 @@
 		created() {
 			// 在组件创建时，将 Vuex store 中的值赋给组件的 data
 			this.tel = this.$store.getters.tel;
+		},
+		Autodisp()
+		{
+			uni.request({
+				url:"http://127.0.0.1:8088/notice",
+				method:"GET",
+				dataType:"json",
+				success: (res) => {
+					this.notices=res.data.data;
+				}
+			})
 		}
 	}
 </script>
