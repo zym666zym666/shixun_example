@@ -1,13 +1,13 @@
 <template>
 	<view class="content">
 		<view class="banner">
-			<image src="../../static/宿舍.png"></image>
+			<image src='../../static/宿舍.png'></image>
 		</view>
 		<view class="box">
-			<view v-for="item in info" :key="item.id" class="inner_box" @click="toSel()">
-				<image src="../../static/宿舍.png"></image>
+			<view v-for="item in info" :key="item.id" class="inner_box" @click="toSel(item)">
+				<image src='../../static/宿舍.png'></image>
 				<view class="text_box">
-					<text id="one">{{item.dong}}栋{{item.lou}}楼&nbsp;{{item.fang}}</text>
+					<text id="one">{{item.dong}}栋{{item.lou}}楼;{{item.fang}}</text>
 					<text id="two">费用标准：￥{{item.cost}}/学年</text>
 					<text id="two">宿舍规格：标准{{item.ren}}人间</text>
 					<text id="two">宿舍设施：{{item.equipment}}</text>
@@ -70,9 +70,10 @@
 					url: "/" + e.pagePath
 				})
 			},
-			toSel: function(){
+			toSel(item){
+				uni.setStorageSync("dormId",item.fang)
 				uni.navigateTo({
-					url:"/pages/dormsel/dormsel"
+					url:'/pages/dormsel/dormsel'
 				})
 			}
 		}
@@ -132,6 +133,7 @@
 	#one {
 		display: inline-block;
 		font-weight: bold;
+		margin-top: 0%;
 		font-size: 35rpx;
 	}
 
@@ -139,7 +141,7 @@
 		display: inline-block;
 		color: #999999;
 		margin-top: 5rpx;
-		font-size: 30rpx;
+		font-size: 28rpx;
 	}
 
 	.my-sub-tabbar-wrapper {

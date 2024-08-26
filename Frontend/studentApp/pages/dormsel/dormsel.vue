@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<view class="box">
-			<view v-for="item in info" :key="item.id" class="inner_box" @click="handleClick(item)">
-				<image :src="item.isOccupied ? '../../static/img/人像.png' : '../../static/img/待入住.png'" id="wait" ></image>
+			<view v-for="(item,index) in info" :key="item.id" class="inner_box" @click="handleClick(item,index)">
+				<image :src="item.isOccupied ? '../../static/人像.png' : '../../static/待入住.png'" id="wait" ></image>
 				<view class="right">
 					<view class="top">
 						<text :id="item.isOccupied ? 'one' : 'two'">{{ getBedText(item) }}</text>
@@ -11,9 +11,9 @@
 						</view>
 					</view>
 					<view class="text-box" v-if="item.isOccupied">
-						<text id="one">手机：{{item.tel}}</text>
+						<text id="one">手机：{{item.phone}}</text>
 						<text id="one">专业：{{item.major}}</text>
-						<text id="one">籍贯：{{item.addr}}</text>
+						<text id="one">籍贯：{{item.nation}}</text>
 					</view>
 				</view>
 			</view>
@@ -23,10 +23,6 @@
 		<view v-if="showModal" class="modal">
 			<view class="modal-content">
 				<text>填写入住信息</text>
-				<input v-model="formData.name" placeholder="姓名" />
-				<input v-model="formData.tel" placeholder="手机号码" />
-				<input v-model="formData.major" placeholder="专业" />
-				<input v-model="formData.addr" placeholder="籍贯" />
 				<view class="modal-footer">
 					<button @click="submitForm">提交</button>
 					<button @click="closeModal">取消</button>
@@ -43,93 +39,145 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				info: [
-					{
-						id: 1,
-						name: "待入住",
-						tel: "",
-						major: "",
-						addr: "",
-						isOccupied: false
-					},
-					{
-						id: 2,
-						name: "待入住",
-						tel: "",
-						major: "",
-						addr: "",
-						isOccupied: false
-					},
-					{
-						id: 3,
-						name: "待入住",
-						tel: "",
-						major: "",
-						addr: "",
-						isOccupied: false
-					},
-					{
-						id: 4,
-						name: "待入住",
-						tel: "",
-						major: "",
-						addr: "",
-						isOccupied: false
-					}
-				],
-				showModal: false,
-				selectedBed: null,
-				formData: {
-					name: '',
-					tel: '',
-					major: '',
-					addr: ''
-				}
-			}
+	  data() {
+	    return {
+	      info: [],
+		  phone:"19562228497",
+		  buildingId: "",
+		  bunk: "",
+		  status: "",
+		  stuName: "",
+		  stuPhone: "",
+		  stuMajor: "",
+		  stuImg: "",
+		  stuNation: "",
+	      showModal: false,
+	    };
+	  },
+	  created() {
+		this.buildingId=uni.getStorageSync("dormId");
+	    this.fetchBedsData(this.buildingId);
+		this.getStu(this.phone)
+	  },
+	  
+	  		
+	  methods: {
+		handleClick(item,index) {
+			this.bunk=index+1;
+		  	if (!item.isOccupied) {
+		  		this.selectedBed = item.id;
+		  		this.showModal = true;
+		  	}
+		  },
+	    getBedText(item) {
+	      return item.isOccupied ? `${item.id}号床位 ${item.name}` : `${item.id}号床位 待入住`;
+	    },
+		closeModal() {
+			this.showModal = false;
 		},
-		methods: {
-			getBedText(item) {
-				return item.isOccupied ? `${item.id}号床位 ${item.name}` : `${item.id}号床位 待入住`;
-			},
-			handleClick(item) {
-				if (!item.isOccupied) {
-					this.selectedBed = item.id;
-					this.showModal = true;
+		//获取学生信息，传到this.data中
+		getStu(phone){
+			uni.request({
+				url:"http://127.0.0.1:8088/getStu",
+				method:"GET",
+				dataType:"json",
+				data:{
+					phone:this.phone
+				},
+				success: (res) => {
+					/* console.log(res.data.data) */
+				  if (res.data.code === 200) {
+				    // 使用等号进行赋值
+				    this.stuName = res.data.data.stuName;
+				    this.stuPhone = res.data.data.phone;
+				    this.stuMajor = res.data.data.major;
+				    this.stuImg = res.data.data.image;
+				    this.stuNation = res.data.data.nation;
+				  } else {
+				    // 使用 uni 框架的 showToast 函数显示加载失败的提示
+				    uni.showToast({
+				      title: "信息加载失败",
+				      icon: "none",
+				      duration: 2000 // 显示时长为2000毫秒
+				    });
+				  }
+				},
+			})
+		},
+		//办理入住
+		submitForm(){
+			/* console.log(this.stuName); */
+			uni.request({
+				url:"http://127.0.0.1:8088/stay",
+				method:"POST",
+				dataType:"json",
+				data:{
+					buildingId: this.buildingId,
+					bunk: this.bunk,
+					status: this.status,
+					stuName: this.stuName,
+					stuPhone: this.stuPhone,
+					stuMajor: this.stuMajor,
+					stuImg: this.stuImg,
+					stuNation: this.stuNation
+				},
+				success(res) {
+				
+					if(res.data.code==200){
+						uni.showToast({
+							title: "办理入住成功",
+							icon: "none",
+							duration:3000,
+						})
+						setTimeout(function() {
+						  window.location.reload();
+						}, 1000);
+						
+					}else{
+						uni.showToast({
+							icon:"error",
+							title:"您已经入住，不可再次选择"
+						})
+					}
 				}
-			},
-			closeModal() {
-				this.showModal = false;
-			},
-			submitForm() {
-				// 构建要发送到后端的请求数据
-				const newBedData = {
-					id: this.selectedBed,
-					name: this.formData.name,
-					tel: this.formData.tel,
-					major: this.formData.major,
-					addr: this.formData.addr,
-					isOccupied: true
-				};
-
-				// 发送POST请求到后端API
-				axios.post("http://127.0.0.1:8088/DormStu", newBedData)
-					.then(response => {
-						console.log(response.data);
-						// 更新前端数据
-						const index = this.info.findIndex(item => item.id === this.selectedBed);
-						if (index !== -1) {
-							this.$set(this.info, index, newBedData);
-						}
-						this.closeModal();
-					})
-					.catch(error => {
-						console.error("Error submitting form:", error);
-					});
-			}
-		}
-	}
+			})
+		},
+		
+		//从数据库中调出宿舍床位信息
+	    fetchBedsData(buildingId){
+	      axios.get('http://127.0.0.1:8088/getDorm', {
+	          params: {
+	            buildingId: this.buildingId
+	          }
+	        })
+	        .then(response => {
+				console.log(response)
+	          // 检查返回的数据结构，确保正确处理
+	          if (response.data.code === 200) {
+	            // 假设后端返回的数据结构是如你提供的JSON格式
+	            const bedsData = response.data.data; // 获取data字段中的数据
+				
+				
+	            console.log(bedsData);
+	            this.info = bedsData.map(bed => ({
+	              id: bed.bunk,
+	              isOccupied: bed.status === "1",
+	              name: bed.stuName || '', // 如果没有名字，显示为空字符串
+	              phone: bed.stuPhone || '', // 如果没有电话号码，显示为空字符串
+	              major: bed.stuMajor || '', // 专业信息
+	              img: bed.stuImg || '', // 图片信息
+	              nation: bed.stuNation || '' // 民族信息
+	            }));
+	          } else {
+	            console.error('返回的数据格式不正确或请求失败:', response.data.msg);
+	          }
+	        })
+	        .catch(error => {
+	          console.error('Error fetching beds data:', error);
+	        });
+	    },
+	  }
+	};
 	
 </script>
 
@@ -187,7 +235,6 @@
 		flex-direction: column;
 		width: 100%;
 		height: 100%;
-		border-bottom: solid #000000 5rpx;
 	}
 	#wait{
 		width: 220rpx ;
