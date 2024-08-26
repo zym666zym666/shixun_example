@@ -65,4 +65,9 @@
         SELECT ROUND((COUNT(CASE WHEN status = 1 THEN 1 END) * 1.0 / COUNT(*)), 4) AS ratio
         FROM t_student
     </select>
+    <select id="queryId" parameterType="java.lang.String">
+        select id
+        from t_student
+        where phone=#{phone}
+    </select>
 </mapper>

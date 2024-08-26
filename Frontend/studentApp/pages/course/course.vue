@@ -88,7 +88,7 @@
 				console.log(item);
 				console.log(course.courseId);
 				uni.request({
-					url: "http://127.0.0.1:8088/Course?phone=" + item + "&courseId=" + course.courseId,
+					url: "http://127.0.0.1:8088/SelectCourse?phone=" + item + "&courseId=" + course.courseId,
 					method: "POST",
 
 

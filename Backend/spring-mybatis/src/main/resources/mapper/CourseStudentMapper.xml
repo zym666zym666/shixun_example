@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 唯一命名空间标识唯一xml文件 id标识查询空间取值与StudentMapper方法对应-->
+<mapper namespace="com.example.spring_mybatis.mapper.CourseStudentMapper">
+    <select id="isSelectTheCourse" parameterType="int">
+        select count(*)
+        from course_student
+        where Course_id=#{course_id} and Student_id=#{student_id}
+    </select>
+    <insert id="courseInsert" parameterType="int">
+        insert into course_student values(#{student_id},#{course_id})
+    </insert>
+    <delete id="courseDelete" parameterType="int">
+        delete from course_student
+        where Course_id=#{course_id} and Student_id=#{student_id}
+    </delete>
+
+</mapper>

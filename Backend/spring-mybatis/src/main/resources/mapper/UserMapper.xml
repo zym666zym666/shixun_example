@@ -4,8 +4,10 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace 唯一命名空间标识唯一xml文件 id标识查询空间取值与StudentMapper方法对应-->
 <mapper namespace="com.example.spring_mybatis.mapper.UserMapper">
-    <!--    登录-->
+    <!--登录-->
     <select id="login" parameterType="java.lang.String" resultType="Users">
-        SELECT user_id,user_name,nickname,email,create_date from t_user WHERE user_name=#{username} and password=#{password} and status=1
+        SELECT user_id,user_name,nickname,email,create_date
+        from t_user
+        WHERE user_name=#{username} and password=#{password} and status=1
     </select>
 </mapper>
