@@ -12,7 +12,7 @@
 				<image src="../../static/数据采集.png"></image>
 				<text>数据采集</text>
 			</view>
-			<view class="nav-item">
+			<view class="nav-item" @click="toOnlineService()">
 				<image src="../../static/咨询.png"></image>
 				<text>在线咨询</text>
 			</view>
@@ -108,6 +108,11 @@
 			toCourse: function() {
 				uni.navigateTo({
 					url: "/pages/course/course"
+				})
+			},
+			toOnlineService:function(){
+				uni.navigateTo({
+					url:"/pages/onlineService/onlineService"
 				})
 			}
 		},
