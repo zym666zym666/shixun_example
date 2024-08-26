@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="box">
 			<view v-for="(item,index) in info" :key="item.id" class="inner_box" @click="handleClick(item,index)">
-				<image :src="item.isOccupied ? '../../static/人像.png' : '../../static/待入住.png'" id="wait" ></image>
+				<image :src="item.isOccupied ? `http://127.0.0.1:8088/file${this.stuImg}` : '../../static/待入住.png'" id="wait" ></image>
 				<view class="right">
 					<view class="top">
 						<text :id="item.isOccupied ? 'one' : 'two'">{{ getBedText(item) }}</text>
