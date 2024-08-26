@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:名称命名空间，唯一标识某一个xml文件
+id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的方法对应
+-->
+<mapper namespace="com.example.spring_mybatis.mapper.DormInfoMapper">
+    <select id="getDormInfo" resultType="map">
+        SELECT
+        COUNT(*) AS totalBeds,
+        COUNT(CASE WHEN status = 1 THEN 1 END) AS occupiedBeds,
+        COUNT(CASE WHEN status = 0 THEN 1 END) AS availableBeds
+        FROM dormsel;
+    </select>
+
+
+</mapper>
