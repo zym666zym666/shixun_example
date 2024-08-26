@@ -12,4 +12,11 @@ public interface NoticeMapper {
     public int update(Notice notice);
     public int delete(Integer id);
     public List<Notice> query();
+
+    //查询所有信息
+    public List<Notice> showNotice();
+    //根据通知id查询指定的通知
+    public Notice showBasedOnId(int id);
+    //查询有限条信息
+    public  List<Notice> showNoticelimit();
 }

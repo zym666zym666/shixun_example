@@ -32,4 +32,19 @@
     <select id="query" resultType="Notice">
         select id,title,content,date from t_notice
     </select>
+    <select id="showNotice">
+        select *
+        from notice
+    </select>
+    <select id="showBasedOnId" parameterType="int">
+        select *
+        from notice
+        where id=#{id}
+    </select>
+    <select id="showNoticelimit" >
+        select  *
+        from notice
+        order by date desc
+        limit 6
+    </select>
 </mapper>

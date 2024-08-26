@@ -33,4 +33,27 @@ public class NoticeController {
         return noticeList.size()>0?R.success(noticeList):R.fail("操作失败");
     }
 
+    //查询所有通知
+    @GetMapping("/notice")
+    public R showNotice()
+    {
+        List<Notice> notices=noticeService.showNotice();
+        return notices!=null?R.success(notices):R.fail("操作失败");
+    }
+    //根据id查询通知
+    @GetMapping("/noticeid")
+    public R showBaesdOnId(int id)
+    {
+        Notice notice=noticeService.showBasedOnId(id);
+        return notice!=null?R.success(notice):R.fail("操作失败");
+    }
+    //查询最新的消息
+    @GetMapping("/noticelimit")
+    public R showNoticelimit()
+    {
+        List<Notice> notices=noticeService.showNoticelimit();
+        return notices!=null?R.success(notices):R.fail("操作失败");
+    }
+
+
 }

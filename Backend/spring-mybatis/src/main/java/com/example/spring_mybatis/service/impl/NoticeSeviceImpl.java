@@ -35,4 +35,19 @@ public class NoticeSeviceImpl implements NoticeService {
     public List<Notice> query() {
         return noticeMapper.query();
     }
+
+    @Override
+    public List<Notice> showNotice() {
+        return noticeMapper.showNotice();
+    }
+
+    @Override
+    public Notice showBasedOnId(int id) {
+        return noticeMapper.showBasedOnId(id);
+    }
+
+    @Override
+    public List<Notice> showNoticelimit() {
+        return noticeMapper.showNoticelimit();
+    }
 }
