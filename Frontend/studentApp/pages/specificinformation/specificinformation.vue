@@ -2,14 +2,18 @@
 	<view class="content">
 		<view class="notice">
 			<view class="title">
-				<text>{{notice.title}}</text>
+				<text>标题：{{notice.title}}</text>
 			</view>
 			<view class="date">
-				<text>{{notice.date}}</text>
+				<text>日期：{{notice.date}}</text>
 			</view>
 			<view class="msg-content">
 				{{notice.content}}
 			</view>
+		</view>
+		<view class="my-sub-tabbar-wrapper">
+			<custom-tab-bar direction="horizontal" :show-icon="true" :selected="selectedIndex"
+				@onTabItemTap="tabbarTaped"></custom-tab-bar>
 		</view>
 	</view>
 </template>
@@ -19,13 +23,14 @@
 		data() {
 			return {
 				notice:[],
+				
 			}
 		},
 		onLoad() {
-			this.AtuoDisp();
+			this.Disp();
 		},
 		methods: {
-			AutoDisp()
+			Disp()
 			{
 				const it=uni.getStorageSync("NOTICEID");
 				uni.request({
@@ -37,10 +42,10 @@
 						{
 							this.notice=res.data.data;
 						}
-						
 					}
 				})
-			}
+				
+			},
 		}
 	}
 </script>
@@ -53,7 +58,7 @@
 .notice{
 	width: 95%;
 	margin-left: 2.5%;
-	height: 1500rpx;
+	height: 1350rpx;
 	border:solid #c5c5c5 1rpx;
 	border-radius: 20rpx;
     display: flex;
@@ -61,29 +66,32 @@
 	position: relative;
 }
 .title{
-	width: 40%;
-	margin-left: 20rpx;
+	width: 45%;
+	margin-left: 10rpx;
 	margin-top: 20rpx;
 	height: 60rpx;
 	border:solid #c5c5c5 1rpx;
 	border-radius: 20rpx;
+	position: absolute;
 }
 .date{
-	width: 40%;
-	margin-left: 100rpx;
+	width: 45%;
+	margin-left: 350rpx;
 	margin-top: 20rpx;
 	height: 60rpx;
 	border:solid #c5c5c5 1rpx;
 	border-radius: 20rpx;
+	position: absolute;
 }
 .title text{
 	line-height: 60rpx;
 	font-size: 25rpx;
-	
+	margin-left: 20rpx;
 }
 .date text{
 	line-height: 60rpx;
 	font-size: 25rpx;
+	margin-left: 20rpx;
 }
 .msg-content{
 	width: 95%;
@@ -93,4 +101,20 @@
 	position: absolute;
 	margin-top: 100rpx;
 }
+.my-sub-tabbar-wrapper{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 96rpx;
+		}
+		
+	/deep/.uni-tabbar__icon img{
+			width: 50rpx;
+			height: 50rpx;
+		}
+		
+	/deep/.uni-tabbar__bd{
+			margin: 5rpx;
+		}
 </style>

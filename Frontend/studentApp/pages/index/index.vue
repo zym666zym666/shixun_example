@@ -43,26 +43,11 @@
 		</view>
 		<text class="message">最新消息</text>
 		<view class="message-box">
-			<view class="msg-content" v-for="notice in notices" :key="notice.id">
+			<view class="msg-content" v-for="notice in notices" :key="notice.id" @click="Tos(notice.id)">
 				<text class="msg-title">{{notice.title}}</text>
-				<text class="msg-date">{{notice.content}}</text>
+				<text class="msg-date">{{notice.date}}</text>
 			</view>
-			<!-- <view class="msg-content">
-				<text class="msg-title">关于23学年学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view>
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view>
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view>
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view> -->
+			
 		</view>
 	</view>
 
@@ -91,6 +76,27 @@
 			this.Autodisp();
 		},
 		methods: {
+		
+			Autodisp()
+			{
+				uni.request({
+					url:"http://127.0.0.1:8088/noticelimit",
+					method:"GET",
+					dataType:"json",
+					success: (res) => {
+						this.notices=res.data.data;
+					},
+					
+				}),
+				console.log(this.notices);
+			},
+			Tos(id)
+			{
+				uni.setStorageSync("NOTICEID",id),
+				uni.navigateTo({
+					url:"/pages/specificinformation/specificinformation",
+				})
+			},
 			tabbarSelected(e) {
 
 			},
@@ -114,23 +120,14 @@
 				uni.navigateTo({
 					url: "/pages/course/course"
 				})
-			}
+			},
+			
 		},
 		created() {
 			// 在组件创建时，将 Vuex store 中的值赋给组件的 data
 			this.tel = this.$store.getters.tel;
 		},
-		Autodisp()
-		{
-			uni.request({
-				url:"http://127.0.0.1:8088/noticelimit",
-				method:"GET",
-				dataType:"json",
-				success: (res) => {
-					this.notices=res.data.data;
-				}
-			})
-		}
+	
 	}
 </script>
 
@@ -199,14 +196,15 @@
 		margin-left: 2.5%;
 		margin-right: 2.5%;
 		margin-top: 15rpx;
-		display: flex;
-		flex-wrap: wrap;
+		
 	}
 
 	.msg-content {
+		margin-top: 10rpx;
 		width: 100%;
 		height: 90rpx;
 		border-bottom: solid #d5d5d5 1rpx;
+		
 	}
 
 	.msg-title {

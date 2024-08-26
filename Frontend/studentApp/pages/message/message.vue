@@ -6,24 +6,9 @@
 		<view class="message-box">
 			<view class="msg-content" v-for="notice in notices" :key="notice.id" @click="Tospecific(notice.id)">
 				<text class="msg-title">{{notice.title}}</text>
-				<text class="msg-date">{{notice.content}}</text>
+				<text class="msg-date">{{notice.date}}</text>
 			</view>
-			<!-- <view class="msg-content">
-				<text class="msg-title">关于23学年学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view>
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view>
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view>
-			<view class="msg-content">
-				<text class="msg-title">关于学生新生报到通知...</text>
-				<text class="msg-date">2024-8-18</text>
-			</view> -->
+			
 		</view>
 	</view>
 </template>
@@ -48,12 +33,12 @@
 					dataType:"json",
 					success: (res) => {
 						this.notices=res.data.data;
-					}
+					},
 				})
 			},
-			Tospecific(notice.id)
+			Tospecific(id)
 			{
-				uni.setStorageSync("NOTICEID",notice.id);
+				uni.setStorageSync("NOTICEID",id),
 				uni.navigateTo({
 					url:"/pages/specificinformation/specificinformation",
 				})
@@ -82,7 +67,7 @@
 }
 .message-box {
 		width: 95%;
-		height: 600rpx;
+		height: 250rpx;
 		background: #fff;
 		margin-left: 2.5%;
 		margin-right: 2.5%;
