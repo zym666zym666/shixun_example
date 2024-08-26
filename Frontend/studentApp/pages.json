@@ -28,6 +28,13 @@
                 "navigationBarTitleText" : ""
             }
         },
+		{
+			"path" : "pages/introduction/introduction",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
         {
             "path" : "pages/dorm/dorm",
             "style" : {
@@ -56,6 +63,13 @@
         },
         {
         	"path" : "pages/message/message",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : ""
+        	}
+        },
+        {
+        	"path" : "pages/specificinformation/specificinformation",
         	"style" : 
         	{
         		"navigationBarTitleText" : ""

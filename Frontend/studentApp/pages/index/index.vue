@@ -36,7 +36,7 @@
 				<image src="../../static/宿舍管理-分配宿舍.png"></image>
 				<text>自选宿舍</text>
 			</view>
-			<view class="nav-item">
+			<view class="nav-item" @click="toIntroduction()">
 				<image src="../../static/院校.png"></image>
 				<text>学院介绍</text>
 			</view>
@@ -105,6 +105,11 @@
 					url: "/pages/datasel/datasel"
 				})
 			},
+			toIntroduction: function() {
+				uni.navigateTo({
+					url: "/pages/introduction/introduction"
+				})
+			},
 			toDorm: function() {
 				uni.navigateTo({
 					url: "/pages/dorm/dorm"
@@ -123,7 +128,7 @@
 		Autodisp()
 		{
 			uni.request({
-				url:"http://127.0.0.1:8088/notice",
+				url:"http://127.0.0.1:8088/noticelimit",
 				method:"GET",
 				dataType:"json",
 				success: (res) => {
