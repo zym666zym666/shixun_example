@@ -3,8 +3,27 @@
 		<view class="header">
 			<text>我的消息</text>
 		</view>
-		<view class="message_box">
-			
+		<view class="message-box">
+			<view class="msg-content" v-for="notice in notices" :key="notice.id" @click="Tospecific(notice.id)">
+				<text class="msg-title">{{notice.title}}</text>
+				<text class="msg-date">{{notice.content}}</text>
+			</view>
+			<!-- <view class="msg-content">
+				<text class="msg-title">关于23学年学生新生报到通知...</text>
+				<text class="msg-date">2024-8-18</text>
+			</view>
+			<view class="msg-content">
+				<text class="msg-title">关于学生新生报到通知...</text>
+				<text class="msg-date">2024-8-18</text>
+			</view>
+			<view class="msg-content">
+				<text class="msg-title">关于学生新生报到通知...</text>
+				<text class="msg-date">2024-8-18</text>
+			</view>
+			<view class="msg-content">
+				<text class="msg-title">关于学生新生报到通知...</text>
+				<text class="msg-date">2024-8-18</text>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -13,11 +32,32 @@
 	export default {
 		data() {
 			return {
-				
+				notices:[],
 			}
 		},
+		onLoad()
+		{
+			this.Autodisp();
+		},
 		methods: {
-			
+			Autodisp()
+			{
+				uni.request({
+					url:"http://127.0.0.1:8088/notice",
+					method:"GET",
+					dataType:"json",
+					success: (res) => {
+						this.notices=res.data.data;
+					}
+				})
+			},
+			Tospecific(notice.id)
+			{
+				uni.setStorageSync("NOTICEID",notice.id);
+				uni.navigateTo({
+					url:"/pages/specificinformation/specificinformation",
+				})
+			}
 		}
 	}
 </script>
@@ -40,12 +80,32 @@
 	margin-left: 225rpx;
 	line-height: 100rpx;
 }
-.message_box{
-	width: 95%;
-	height:150rpx;
-	margin-left: 2.5%;
-	margin-top: 10rpx;
-	border-bottom: solid #d4d4d4 1rpx;
-	
-}
+.message-box {
+		width: 95%;
+		height: 600rpx;
+		background: #fff;
+		margin-left: 2.5%;
+		margin-right: 2.5%;
+		margin-top: 15rpx;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.msg-content {
+		width: 100%;
+		height: 90rpx;
+		border-bottom: solid #d5d5d5 1rpx;
+	}
+
+	.msg-title {
+		font-size: 35rpx;
+		line-height: 90rpx;
+	}
+
+	.msg-date {
+		display: inline-block;
+		float: right;
+		margin-top: 20rpx;
+		margin-right: 20rpx;
+	}
 </style>
