@@ -55,11 +55,14 @@
             "style" : {}
         },
         {
-        	"path" : "pages/message/message",
-        	"style" : 
-        	{
-        		"navigationBarTitleText" : ""
-        	}
+            "path" : "pages/message/message",
+            "style" : {
+                "navigationBarTitleText" : ""
+            }
+        },
+        {
+            "path" : "pages/onlineService/onlineService",
+            "style" : {}
         }
     ],
     "globalStyle" : {
