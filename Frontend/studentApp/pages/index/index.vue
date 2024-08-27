@@ -36,7 +36,7 @@
 				<image src="../../static/宿舍管理-分配宿舍.png"></image>
 				<text>自选宿舍</text>
 			</view>
-			<view class="nav-item">
+			<view class="nav-item" @click="toIntroduction()">
 				<image src="../../static/院校.png"></image>
 				<text>学院介绍</text>
 			</view>
@@ -47,7 +47,7 @@
 				<text class="msg-title">{{notice.title}}</text>
 				<text class="msg-date">{{notice.date}}</text>
 			</view>
-			
+
 		</view>
 	</view>
 
@@ -68,34 +68,36 @@
 					url: "../../static/banner3.png"
 				}],
 				tel: "",
-				notices:[],
+				notices: [],
 			}
 		},
-		onLoad()
-		{
+		onLoad() {
 			this.Autodisp();
 		},
 		methods: {
-		
-			Autodisp()
-			{
-				uni.request({
-					url:"http://127.0.0.1:8081/noticelimit",
-					method:"GET",
-					dataType:"json",
-					success: (res) => {
-						this.notices=res.data.data;
-					},
-					
-				}),
-				console.log(this.notices);
-			},
-			Tos(id)
-			{
-				uni.setStorageSync("NOTICEID",id),
+			toIntroduction: function() {
 				uni.navigateTo({
-					url:"/pages/specificinformation/specificinformation",
+					url: "/pages/introduction/introduction"
 				})
+			},
+
+			Autodisp() {
+				uni.request({
+						url: "http://127.0.0.1:8081/noticelimit",
+						method: "GET",
+						dataType: "json",
+						success: (res) => {
+							this.notices = res.data.data;
+						},
+
+					}),
+					console.log(this.notices);
+			},
+			Tos(id) {
+				uni.setStorageSync("NOTICEID", id),
+					uni.navigateTo({
+						url: "/pages/specificinformation/specificinformation",
+					})
 			},
 			tabbarSelected(e) {
 
@@ -116,9 +118,9 @@
 					url: "/pages/dorm/dorm"
 				})
 			},
-			toReport:function(){
+			toReport: function() {
 				uni.navigateTo({
-					url:"/pages/reporting/reporting"
+					url: "/pages/reporting/reporting"
 				})
 			},
 			toCourse: function() {
@@ -126,15 +128,14 @@
 					url: "/pages/course/course"
 				})
 			},
-			toNavigate:function(){
+			toNavigate: function() {
 				uni.navigateTo({
-					url:"/pages/navigation/navigation"
+					url: "/pages/navigation/navigation"
 				})
 			},
-			toService:function()
-			{
+			toService: function() {
 				uni.navigateTo({
-					url:"/pages/onlineService/onlineService"
+					url: "/pages/onlineService/onlineService"
 				})
 			}
 		},
@@ -142,14 +143,13 @@
 			// 在组件创建时，将 Vuex store 中的值赋给组件的 data
 			this.tel = this.$store.getters.tel;
 		},
-		Autodisp()
-		{
+		Autodisp() {
 			uni.request({
-				url:"http://127.0.0.1:8081/notice",
-				method:"GET",
-				dataType:"json",
+				url: "http://127.0.0.1:8081/notice",
+				method: "GET",
+				dataType: "json",
 				success: (res) => {
-					this.notices=res.data.data;
+					this.notices = res.data.data;
 				}
 			})
 		}
@@ -221,7 +221,7 @@
 		margin-left: 2.5%;
 		margin-right: 2.5%;
 		margin-top: 15rpx;
-		
+
 	}
 
 	.msg-content {
@@ -229,7 +229,7 @@
 		width: 100%;
 		height: 90rpx;
 		border-bottom: solid #d5d5d5 1rpx;
-		
+
 	}
 
 	.msg-title {

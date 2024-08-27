@@ -90,6 +90,20 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/introduction/introduction",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/web-view-page/web-view-page",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
     ],
     "globalStyle" : {
