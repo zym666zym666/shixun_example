@@ -30,4 +30,30 @@
         from course_student
         where Student_id=#{student_id})
     </select>
+<!--    后天管理系统-->
+    <!--添加课程信息-->
+    <insert id="insert" parameterType="Course">
+        insert into course(course_name,course_teacher,course_place,course_capacity,course_begin_time,course_end_time,course_number)
+        value(#{courseName},#{courseTeacher},#{coursePlace},#{courseCapacity},#{courseBeginTime},#{courseEndTime},0)
+    </insert>
+
+    <!--查询所有课程信息-->
+    <select id="query" resultType="Course">
+        select *
+        from course
+    </select>
+
+    <!--    修改课程信息-->
+    <update id="update" parameterType="Course">
+        update course
+        set course_name=#{courseName},course_teacher=#{courseTeacher},course_place=#{coursePlace},course_capacity=#{courseCapacity}
+        where course_id = #{courseId}
+
+    </update>
+
+    <!--删除课程-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from course where course_id = #{id}
+    </delete>
+
 </mapper>

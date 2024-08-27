@@ -40,4 +40,24 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.queryBasedOnStudentID(student_id);
     }
 
+
+    @Override
+    public int insert(Course course) {
+        return courseMapper.insert(course);
+    }
+
+    @Override
+    public List<Course> query() {
+        return courseMapper.query();
+    }
+
+    @Override
+    public int update(Course course) {
+        return courseMapper.update(course);
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return courseMapper.delete(id);
+    }
 }

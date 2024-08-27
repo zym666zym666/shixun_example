@@ -100,4 +100,36 @@ public class CourseController {
         }
         return R.fail("操作失败");
     }
+
+
+    //后台管理系统
+    //新增课程
+    @PostMapping("/api/insertCourse")
+    public R addCourse(@RequestBody Course course)
+    {
+
+        int row=courseService.insert(course);
+        return row>0?R.success(row):R.fail("操作失败");
+    }
+    //查询所有课程
+    @GetMapping("/api/allCourse")
+    public R queryAllCourse()
+    {
+        List<Course> courses=courseService.query();
+        return courses!=null?R.success(courses):R.fail("操作失败");
+    }
+    //修改课程
+    @PostMapping("/api/updateCourse")
+    public R update(@RequestBody Course course)
+    {
+        int ret=courseService.update(course);
+        return ret!=0?R.success(ret):R.fail("操作失败");
+    }
+    //删除课程
+    @PostMapping("/api/deleteCourse")
+    public R deleteCourse(Integer id){
+
+        int row = courseService.delete(id);
+        return row > 0?R.success(row):R.fail("操作失败");
+    }
 }

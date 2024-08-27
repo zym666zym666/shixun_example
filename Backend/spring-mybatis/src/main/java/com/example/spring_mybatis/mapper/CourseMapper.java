@@ -17,4 +17,14 @@ public interface CourseMapper {
     public void courseDrop(int course_id);
     //根据学生id查询出其选择的所有课程信息
     public List<Course> queryBasedOnStudentID(int student_id);
+
+    //后台管理系统
+    //添加课程信息
+    public int  insert(Course course);
+    //查询所有课程信息
+    public List<Course> query();
+    //修改课程信息
+    public int update(Course course);
+    //删除课程信息
+    public int delete(Integer id);
 }
