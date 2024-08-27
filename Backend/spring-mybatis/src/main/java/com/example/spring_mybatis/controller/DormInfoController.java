@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,8 +25,9 @@ public class DormInfoController {
 
     @GetMapping("/getBuildId")
     public R getBuildId() {
-        List<Map<String, Object>> buildId = dormInfoService.getBuildId() ;
+        List<Map<String, Object>> buildId = dormInfoService.getBuildId();
         return buildId != null ? R.success(buildId) : R.fail("操作失败");
     }
+}
 
 
