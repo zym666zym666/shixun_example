@@ -24,7 +24,7 @@
 				<image src="../../static/预约.png"></image>
 				<text>体检预约</text>
 			</view>
-			<view class="nav-item">
+			<view class="nav-item" @click="toNavigate()">
 				<image src="../../static/导航图标.png"></image>
 				<text>学院导航</text>
 			</view>
@@ -80,7 +80,7 @@
 			Autodisp()
 			{
 				uni.request({
-					url:"http://127.0.0.1:8088/noticelimit",
+					url:"http://127.0.0.1:8081/noticelimit",
 					method:"GET",
 					dataType:"json",
 					success: (res) => {
@@ -119,6 +119,11 @@
 			toCourse: function() {
 				uni.navigateTo({
 					url: "/pages/course/course"
+				})
+			},
+			toNavigate:function(){
+				uni.navigateTo({
+					url:"/pages/navigation/navigation"
 				})
 			},
 			toService:function()
