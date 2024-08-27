@@ -4,6 +4,7 @@ import com.example.spring_mybatis.pojo.DormSel;
 import com.example.spring_mybatis.pojo.Student;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DormSelService {
     public int stay(DormSel dormSel);
