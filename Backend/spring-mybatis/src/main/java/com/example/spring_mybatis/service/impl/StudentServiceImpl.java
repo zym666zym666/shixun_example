@@ -78,4 +78,10 @@ public class StudentServiceImpl implements StudentService {
     {
         return studentMapper.queryId(phone);
     }
+
+    @Override
+    public List getRen() {
+        return studentMapper.getRen();
+    }
+
 }

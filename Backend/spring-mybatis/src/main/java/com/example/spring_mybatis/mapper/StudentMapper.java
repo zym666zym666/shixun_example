@@ -33,6 +33,7 @@ public interface StudentMapper {
     public BigDecimal getRate();
 // 根据学生手机号查询学生id
 public Integer queryId(String phone);
-
+//获取各日报到人数
+public List getRen();
 }
 
