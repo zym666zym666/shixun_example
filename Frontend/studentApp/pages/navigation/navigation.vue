@@ -2,12 +2,12 @@
 	<view class="content">
 		<movable-area class="movable">
 			<movable-view direction="all" :scale="true" :scale-min="1" :scale-max="3" style="width: 100%; height: 100%;">
-				<image src="../../static/img/虎溪地图.jpg" id="map"></image>
+				<image src="../../static/虎溪地图.jpg" id="map"></image>
 			</movable-view>
 		</movable-area>
 		<movable-area class="movable">
 			<movable-view direction="all" :scale="true" :scale-min="1" :scale-max="3" style="width: 100%; height: 100%;">
-				<image src="../../static/img/重大A区.jpg" id="A"></image>
+				<image src="../../static/重大A区.jpg" id="A"></image>
 			</movable-view>
 		</movable-area>
 	</view>

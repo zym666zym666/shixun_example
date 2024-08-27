@@ -28,7 +28,7 @@
 				<image src="../../static/导航图标.png"></image>
 				<text>学院导航</text>
 			</view>
-			<view class="nav-item">
+			<view class="nav-item" @click="toReport()">
 				<image src="../../static/报到流程.png"></image>
 				<text>报到流程</text>
 			</view>
@@ -114,6 +114,11 @@
 			toDorm: function() {
 				uni.navigateTo({
 					url: "/pages/dorm/dorm"
+				})
+			},
+			toReport:function(){
+				uni.navigateTo({
+					url:"/pages/reporting/reporting"
 				})
 			},
 			toCourse: function() {

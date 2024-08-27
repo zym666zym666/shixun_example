@@ -74,6 +74,20 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" :"pages/reporting/reporting",
+			"style" :
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" :"pages/navigation/navigation",
+			"style" :
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
     ],
     "globalStyle" : {
