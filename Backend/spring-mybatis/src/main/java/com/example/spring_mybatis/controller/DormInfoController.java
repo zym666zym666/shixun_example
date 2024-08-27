@@ -28,6 +28,7 @@ public class DormInfoController {
         List<Map<String, Object>> buildId = dormInfoService.getBuildId();
         return buildId != null ? R.success(buildId) : R.fail("操作失败");
     }
+
 }
 
 

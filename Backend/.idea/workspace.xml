@@ -24,6 +24,12 @@
   <component name="ChangeListManager">
     <list default="true" id="c04578bd-fa51-4043-93ca-f58471ca979a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/controller/DormInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/controller/DormInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/controller/DormSelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/controller/DormSelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/mapper/DormSelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/mapper/DormSelMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/service/DormSelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/service/DormSelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/service/impl/DormSelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-mybatis/src/main/java/com/example/spring_mybatis/service/impl/DormSelServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-mybatis/src/main/resources/mapper/DormSelMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-mybatis/src/main/resources/mapper/DormSelMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +93,7 @@
       <workItem from="1724655762123" duration="1294000" />
       <workItem from="1724660151066" duration="693000" />
       <workItem from="1724674772478" duration="24000" />
-      <workItem from="1724720842425" duration="2789000" />
+      <workItem from="1724720842425" duration="2874000" />
     </task>
     <servers />
   </component>

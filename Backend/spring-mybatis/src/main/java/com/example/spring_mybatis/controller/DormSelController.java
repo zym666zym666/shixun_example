@@ -43,4 +43,11 @@ public class DormSelController {
         return  dor!=null?R.success(dor):R.fail("操作失败");
     }
 
+    @GetMapping("/getDormId")
+    public R getDormId(){
+        List<String> id=dormSelService.getDormId();
+        return id!=null?R.success(id):R.fail("操作失败");
+    }
+
+
 }

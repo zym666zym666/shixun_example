@@ -13,5 +13,5 @@ public interface DormSelMapper {
     Student getMessage(String phone);
     List<DormSel> getDorm(String buildingId);
     int isStay(String stuPhone);
-
+    List<String> getDormId();
 }
