@@ -6,6 +6,8 @@ import com.example.spring_mybatis.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.io.IOException;
 import java.util.Map;
@@ -100,6 +102,17 @@ public class LoginController {
 public R getRate() {
     try{
         float res = studentService.getRate();
+        return R.success(res);
+    }catch (Exception e) {
+        e.printStackTrace();
+        return R.fail("查询信息失败");
+    }
+}
+//获取各日报到人数
+@GetMapping("/getRen")
+public R getRen() {
+    try{
+        List<Map<String, Integer>> res = studentService.getRen();
         return R.success(res);
     }catch (Exception e) {
         e.printStackTrace();

@@ -17,4 +17,5 @@ public interface StudentService {
     public List getInsCnt();
     public float getRate();
     public Integer queryId(String phone);
+    public List getRen();
 }

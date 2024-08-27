@@ -64,9 +64,17 @@
         SELECT ROUND((COUNT(CASE WHEN status = 1 THEN 1 END) * 1.0 / COUNT(*)), 4) AS ratio
         FROM t_student
     </select>
+<!--    通过手机号获取学生学号-->
     <select id="queryId" parameterType="java.lang.String">
         select id
         from t_student
         where tel=#{phone}
+    </select>
+<!--    获取当日报道人数-->
+    <select id="getRen"  resultType="java.util.HashMap">
+        SELECT date_format(date, '%Y-%m-%d') AS date, COUNT(*) AS count
+        FROM checkin_info
+        GROUP BY date
+        ORDER BY date ASC
     </select>
 </mapper>
