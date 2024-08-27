@@ -23,8 +23,8 @@ public class DormInfoController {
 
     @GetMapping("/getBuildId")
     public R getBuildId() {
-        List<String> dormInfo = dormInfoService.getBuildId() ;
-        return dormInfo != null ? R.success(dormInfo) : R.fail("操作失败");
+        List<Map<String, Object>> buildId = dormInfoService.getBuildId() ;
+        return buildId != null ? R.success(buildId) : R.fail("操作失败");
     }
-}
+
 

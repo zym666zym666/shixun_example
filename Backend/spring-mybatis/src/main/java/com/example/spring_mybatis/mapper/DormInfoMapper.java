@@ -8,5 +8,6 @@ import java.util.Map;
 @Mapper
 public interface DormInfoMapper {
     Map<String, Object> getDormInfo();
-    List<String> getBuildId();
+    List<Map<String, Object>> getBuildId();
+
 }

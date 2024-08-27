@@ -17,7 +17,7 @@ public class DormInfoServiceImpl implements DormInfoService {
     }
 
     @Override
-    public List<String> getBuildId() {
+    public List<Map<String, Object>> getBuildId() {
         return dormInfoMapper.getBuildId();
     }
 
