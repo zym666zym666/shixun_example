@@ -20,5 +20,11 @@ public class DormInfoController {
         Map<String, Object> dormInfo = dormInfoService.getDormInfo();
         return dormInfo != null ? R.success(dormInfo) : R.fail("操作失败");
     }
+
+    @GetMapping("/getBuildId")
+    public R getBuildId() {
+        List<String> dormInfo = dormInfoService.getBuildId() ;
+        return dormInfo != null ? R.success(dormInfo) : R.fail("操作失败");
+    }
 }
 
