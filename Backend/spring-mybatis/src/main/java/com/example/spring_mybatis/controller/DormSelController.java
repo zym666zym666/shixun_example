@@ -43,4 +43,33 @@ public class DormSelController {
         return  dor!=null?R.success(dor):R.fail("操作失败");
     }
 
+    @GetMapping("/getDormId")
+    public R getDormId(){
+        List<String> id=dormSelService.getDormId();
+        return id!=null?R.success(id):R.fail("操作失败");
+    }
+
+    //查询全部宿舍门牌号
+    @GetMapping("api/getAllDormId")
+    public R getAllDorm(){
+        List <Map<String,Object>> dors=dormSelService.getAllDormId();
+        return  dors!=null?R.success(dors):R.fail("操作失败");
+    }
+
+    //添加宿舍
+    @PostMapping("api/addDorm")
+    public R addDorm(String buildingId){
+        int isAdd=dormSelService.addDorm(buildingId);
+        return isAdd>0?R.success(isAdd):R.fail("操作失败");
+    }
+
+    //删除宿舍
+    @PostMapping("api/deleteDorm")
+    public R deleteDrom(String buildingId){
+        int isDelete=dormSelService.deleteDorm(buildingId);
+        return isDelete>0?R.success(isDelete):R.fail("操作失败");
+    }
+
+
+
 }

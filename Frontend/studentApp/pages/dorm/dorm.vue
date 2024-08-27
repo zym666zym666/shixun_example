@@ -7,7 +7,7 @@
 			<view v-for="item in info" :key="item.id" class="inner_box" @click="toSel(item)">
 				<image src='../../static/宿舍.png'></image>
 				<view class="text_box">
-					<text id="one">{{item.dong}}栋{{item.lou}}楼;{{item.fang}}</text>
+					<text id="one">房间号：{{item.id}}</text>
 					<text id="two">费用标准：￥{{item.cost}}/学年</text>
 					<text id="two">宿舍规格：标准{{item.ren}}人间</text>
 					<text id="two">宿舍设施：{{item.equipment}}</text>
@@ -25,61 +25,52 @@
 	export default {
 		data() {
 			return {
-				info: [{
-					id: 1,
-					dong: 5,
-					lou: 3,
-					fang: 301,
-					cost: 1000,
-					ren: 4,
-					equipment: "空调，卫生间"
-				}, {
-					id: 2,
-					dong: 5,
-					lou: 3,
-					fang: 302,
-					cost: 1000,
-					ren: 4,
-					equipment: "空调，卫生间"
-				}, {
-					id: 3,
-					dong: 5,
-					lou: 4,
-					fang: 403,
-					cost: 1000,
-					ren: 4,
-					equipment: "空调，卫生间"
-				}, {
-					id: 4,
-					dong: 5,
-					lou: 5,
-					fang: 501,
-					cost: 1000,
-					ren: 4,
-					equipment: "空调，卫生间"
-				}],
-				selectedIndex:0
-			}
+				info: []
+			};
+		},
+		created() {
+			// 发起请求从后端获取房间号
+			this.fetchRoomInfo();
 		},
 		methods: {
 			tabbarSelected(e) {
 
 			},
 			tabbarTaped(e) {
-				console.log(e.pagePath)
+				console.log(e.pagePath);
 				uni.switchTab({
 					url: "/" + e.pagePath
-				})
+				});
 			},
-			toSel(item){
-				uni.setStorageSync("dormId",item.fang)
+			toSel(item) {
+				uni.setStorageSync("dormId", item.id);
 				uni.navigateTo({
-					url:'/pages/dormsel/dormsel'
-				})
+					url: '/pages/dormsel/dormsel'
+				});
+			},
+			fetchRoomInfo() {
+				axios.get('http://127.0.0.1:8081/getDormId') // 假设只获取房间号
+					.then(response => {
+						if (response.data.code === 200) {
+							// 遍历后端返回的房间号，填入固定的 cost, ren, equipment 信息
+							this.info = response.data.data.map(id => ({
+								id: id, // 动态的房间号
+								cost: '1000', // 固定的费用
+								ren: '4', // 固定的宿舍规格
+								equipment: '独立卫浴，空调' // 固定的宿舍设施
+							}));
+						} else {
+							console.error('查询失败:', response.data.msg);
+						}
+					})
+					.catch(error => {
+						console.error('请求失败:', error);
+					});
 			}
 		}
-	}
+	};
 </script>
+
 
 <style>
 	.content {
@@ -99,6 +90,7 @@
 
 	.box {
 		display: flex;
+	    overflow-y: auto;
 		flex-direction: column;
 		border-radius: 30rpx;
 		width: 90%;

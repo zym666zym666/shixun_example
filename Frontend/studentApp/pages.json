@@ -78,6 +78,15 @@
 		{
 			"path" : "pages/settings/settings",
 			"style" : 
+			"path" :"pages/reporting/reporting",
+			"style" :
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" :"pages/navigation/navigation",
+			"style" :
 			{
 				"navigationBarTitleText" : ""
 			}

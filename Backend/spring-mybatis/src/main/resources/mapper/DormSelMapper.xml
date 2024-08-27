@@ -31,4 +31,38 @@ id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的�
         select count(*) from dormsel
         where stu_phone=#{stuPhone}
     </select>
+
+    <!--查询宿舍编号-->
+    <select id="getDormId" resultType="java.lang.String">
+        select distinct building_id from dormsel;
+    </select>
+
+    <!--查询所有宿舍门牌号-->
+    <select id="getAllDormId" resultType="map">
+        SELECT
+        building_id,
+        COUNT(CASE WHEN status = '1' THEN 1 END) AS occupied_count
+        FROM
+        dormsel
+        GROUP BY
+        building_id
+        ORDER BY
+        building_id ASC;
+    </select>
+
+    <!--新增宿舍-->
+    <insert id="addDorm">
+        insert into dormsel (building_id, bunk, status, stu_name, stu_phone, stu_major, stu_img, stu_nation)
+        VALUES
+        (#{buildingId}, '1', '0', NULL, NULL, NULL, NULL, NULL),
+        (#{buildingId}, '2', '0', NULL, NULL, NULL, NULL, NULL),
+        (#{buildingId}, '3', '0', NULL, NULL, NULL, NULL, NULL),
+        (#{buildingId}, '4', '0', NULL, NULL, NULL, NULL, NULL);
+    </insert>
+
+    <!--删除宿舍-->
+    <delete id="deleteDorm">
+        DELETE FROM dormsel WHERE  building_id=#{buildingId}
+    </delete>
+
 </mapper>

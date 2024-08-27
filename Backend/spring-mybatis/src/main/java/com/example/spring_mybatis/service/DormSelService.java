@@ -10,4 +10,9 @@ public interface DormSelService {
     Student getMessage(String phone);
     List<DormSel> getDorm(String buildingId);
     int isStay(String phone);
+    List<String> getDormId();
+    List<Map<String,Object>> getAllDormId();
+    int addDorm(String buildingId);
+    int deleteDorm(String buildingId);
+
 }

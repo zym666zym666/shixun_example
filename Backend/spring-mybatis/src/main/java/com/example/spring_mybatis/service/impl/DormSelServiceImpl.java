@@ -34,5 +34,27 @@ public class DormSelServiceImpl implements DormSelService {
         return dormSelMapper.isStay(phone);
     }
 
+    @Override
+    public List<String> getDormId() {
+        return dormSelMapper.getDormId();
+    }
+
+    @Override
+    public List<Map<String,Object>> getAllDormId() {
+        return dormSelMapper.getAllDormId();
+    }
+
+    @Override
+    public int addDorm(String buildingId) {
+        return dormSelMapper.addDorm(buildingId);
+    }
+
+    @Override
+    public int deleteDorm(String buildingId) {
+        return dormSelMapper.deleteDorm(buildingId);
+    }
+
+
+
 
 }
