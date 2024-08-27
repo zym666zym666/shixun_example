@@ -32,8 +32,10 @@ public interface StudentMapper {
 //    获取报到比例
     public BigDecimal getRate();
 // 根据学生手机号查询学生id
-public Integer queryId(String phone);
+    public Integer queryId(String phone);
 //获取各日报到人数
-public List getRen();
+    public List getRen();
+//修改注册手机号
+    public int updateTel(String tel,String phone);
 }
 

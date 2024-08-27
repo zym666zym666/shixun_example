@@ -84,4 +84,9 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.getRen();
     }
 
+    @Override
+    public int updateTel(String tel,String  phone) {
+        return studentMapper.updateTel(tel,phone);
+    }
+
 }

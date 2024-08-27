@@ -23,7 +23,7 @@
 		data() {
 			return {
 				notice:[],
-				
+				selectedIndex:1
 			}
 		},
 		onLoad() {
@@ -34,7 +34,7 @@
 			{
 				const it=uni.getStorageSync("NOTICEID");
 				uni.request({
-					url:"http://127.0.0.1:8088/noticeid?id="+it,
+					url:"http://127.0.0.1:8081/noticeid?id="+it,
 					method:"GET",
 					dataType:"json",
 					success: (res) => {

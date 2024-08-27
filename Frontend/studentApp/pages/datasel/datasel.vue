@@ -12,7 +12,7 @@
 			<view class="text-box">
 				<text class="label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</text>
 				<view class="write">
-					<input type="text" v-model="name" />
+					<input focus="true"  type="text" v-model="name" />
 				</view>
 			</view>
 			<view class="text-box">

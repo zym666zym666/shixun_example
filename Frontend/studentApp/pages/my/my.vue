@@ -64,7 +64,7 @@
 				</view>
 			</view>
 		</view>
-		<button class="btn" @click="logout()">登出</button>
+		<button class="btn" @click="settings()">设置</button>
 	</view>
 </template>
 
@@ -141,15 +141,15 @@
 					}
 				});
 			},
-			logout() {
-				uni.showToast({
-					title: "登出成功",
-					icon: "success",
-					duration: 2000
-				});
+			settings() {
+				// uni.showToast({
+				// 	title: "登出成功",
+				// 	icon: "success",
+				// 	duration: 2000
+				// });
 				// 进行实际的登出操作，比如清除用户信息，跳转到登录页面等
 				uni.navigateTo({
-					url: "/pages/login/login"
+					url: "/pages/settings/settings"
 				});
 			}
 		}

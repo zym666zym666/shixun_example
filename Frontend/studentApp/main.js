@@ -9,12 +9,13 @@ import {
 const store = createStore({
 	state() {
 		return {
-			tel: '' // 你需要存储的全局状态
+			tel: uni.getStorageSync('userTel') || '' // 从本地存储中恢复 tel
 		};
 	},
 	mutations: {
 		setTel(state, tel) {
 			state.tel = tel;
+			uni.setStorageSync('userTel', tel); 
 		}
 	},
 	getters: {

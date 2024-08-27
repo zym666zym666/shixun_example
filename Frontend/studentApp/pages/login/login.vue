@@ -5,7 +5,7 @@
 		<view class="phone-box">
 			<text id="phone_title">+86</text>
 			<image src="../../static/sjx.png"></image>
-			<input v-model="tel" type="text" placeholder="请输入手机号" />
+			<input focus="true" v-model="tel" type="text" placeholder="请输入手机号" />
 		</view>
 		<view class="passwd-box">
 			<text>密码</text>
@@ -101,6 +101,7 @@
 					success: (res) => {
 						if (res.data.code === 200) {
 							this.$store.commit('setTel', this.tel); // 更新 Vuex store 中的 tel 值
+							uni.setStorageSync('userTel', this.tel); 
 							console.log(this.$store.getters.tel);
 							uni.showToast({
 								title: "登录成功",

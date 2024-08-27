@@ -58,7 +58,7 @@
 					ren: 4,
 					equipment: "空调，卫生间"
 				}],
-				// selectedIndex:0
+				selectedIndex:0
 			}
 		},
 		methods: {

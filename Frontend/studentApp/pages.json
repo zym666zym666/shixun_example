@@ -74,6 +74,13 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/settings/settings",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
     ],
     "globalStyle" : {

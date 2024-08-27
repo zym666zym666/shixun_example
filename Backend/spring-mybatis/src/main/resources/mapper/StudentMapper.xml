@@ -77,4 +77,10 @@
         GROUP BY date
         ORDER BY date ASC
     </select>
+<!--    修改注册手机号-->
+    <update id="updateTel" parameterType="java.lang.String">
+        UPDATE t_student
+        SET tel = #{phone}
+        WHERE tel=#{tel}
+    </update>
 </mapper>

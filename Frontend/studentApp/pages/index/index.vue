@@ -80,7 +80,7 @@
 			Autodisp()
 			{
 				uni.request({
-					url:"http://127.0.0.1:8088/noticelimit",
+					url:"http://127.0.0.1:8081/noticelimit",
 					method:"GET",
 					dataType:"json",
 					success: (res) => {

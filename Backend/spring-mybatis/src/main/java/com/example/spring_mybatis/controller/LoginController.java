@@ -119,4 +119,15 @@ public R getRen() {
         return R.fail("查询信息失败");
     }
 }
+//修改注册手机号
+@PostMapping("/updateTel")
+public R updateTel(@RequestParam String tel, @RequestParam String phone) {
+    try{
+        int res = studentService.updateTel(tel,phone);
+        return R.success(res);
+    }catch (Exception e) {
+        e.printStackTrace();
+        return R.fail("查询信息失败");
+    }
+}
 }
