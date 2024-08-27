@@ -33,6 +33,14 @@ public class NoticeController {
         return noticeList.size()>0?R.success(noticeList):R.fail("操作失败");
     }
 
+    //根据标题查询信息
+    @GetMapping("api/getNotice")
+    public R getNotice(String title){
+        List<Notice> notices=noticeService.getNotice(title);
+        System.out.println(title);
+        return notices!=null?R.success(notices):R.fail("操作失败");
+    }
+
     //查询所有通知
     @GetMapping("/notice")
     public R showNotice()

@@ -47,4 +47,9 @@
         order by date desc
         limit 6
     </select>
+    <!--根据标题查通知-->
+    <select id="getNotice" resultType="Notice">
+        select id,title,content,date from t_notice
+        where title=#{title}
+    </select>
 </mapper>

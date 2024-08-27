@@ -19,4 +19,6 @@ public interface NoticeMapper {
     public Notice showBasedOnId(int id);
     //查询有限条信息
     public  List<Notice> showNoticelimit();
+    //根据标题查通知
+    public List<Notice> getNotice(String title);
 }

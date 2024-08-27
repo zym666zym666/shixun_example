@@ -10,8 +10,8 @@ public interface NoticeService {
     int insert(Notice notice);
     int update(Notice notice);
     int delete(Integer id);
-    List<Notice> query();
-
+    public List<Notice> query();
+    public List<Notice> getNotice(String title);
     public List<Notice> showNotice();
     public Notice showBasedOnId(int id);
     public List<Notice> showNoticelimit();

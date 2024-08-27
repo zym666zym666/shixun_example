@@ -37,6 +37,11 @@ public class NoticeSeviceImpl implements NoticeService {
     }
 
     @Override
+    public List<Notice> getNotice(String title) {
+        return noticeMapper.getNotice(title);
+    }
+
+    @Override
     public List<Notice> showNotice() {
         return noticeMapper.showNotice();
     }

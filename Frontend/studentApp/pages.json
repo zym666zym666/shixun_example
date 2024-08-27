@@ -77,7 +77,7 @@
 		},
 		{
 			"path" : "pages/settings/settings",
-			"style" : 
+			"style" : {},
 			"path" :"pages/reporting/reporting",
 			"style" :
 			{
