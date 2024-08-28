@@ -132,4 +132,11 @@ public class CourseController {
         int row = courseService.delete(id);
         return row > 0?R.success(row):R.fail("操作失败");
     }
+    //批量删除课程
+    @PostMapping("/api/Delete")
+    public R Delete(int[] ids)
+    {
+        int row=courseService.Delete(ids);
+        return row>0?R.success(row):R.fail("操作失败");
+    }
 }

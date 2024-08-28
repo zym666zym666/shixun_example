@@ -56,4 +56,12 @@
         delete from course where course_id = #{id}
     </delete>
 
+    <!--    批量删除-->
+    <delete id="Delete" parameterType="int">
+        delete from course
+        where course_id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
