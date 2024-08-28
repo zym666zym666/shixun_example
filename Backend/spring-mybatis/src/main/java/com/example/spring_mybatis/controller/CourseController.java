@@ -107,7 +107,8 @@ public class CourseController {
     @PostMapping("/api/insertCourse")
     public R addCourse(@RequestBody Course course)
     {
-
+        int ret=courseService.isRepeated(course);
+        if(ret!=0) return R.fail("操作失败");
         int row=courseService.insert(course);
         return row>0?R.success(row):R.fail("操作失败");
     }
@@ -131,5 +132,12 @@ public class CourseController {
 
         int row = courseService.delete(id);
         return row > 0?R.success(row):R.fail("操作失败");
+    }
+    //批量删除课程
+    @PostMapping("/api/Delete")
+    public R Delete(int[] ids)
+    {
+        int row=courseService.Delete(ids);
+        return row>0?R.success(row):R.fail("操作失败");
     }
 }

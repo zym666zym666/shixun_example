@@ -15,7 +15,12 @@ public interface CourseService {
     int insert(Course course);
     //查询所有课程信息
     List<Course> query();
+    //修改课程信息
     int update(Course course);
-
+    //删除课程
     int delete(Integer id);
+    //批量删除
+    public int Delete(int[] ids);
+    //检查课程是否存在
+    int isRepeated(Course course);
 }
