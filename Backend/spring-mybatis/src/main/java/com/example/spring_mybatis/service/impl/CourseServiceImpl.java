@@ -65,4 +65,9 @@ public class CourseServiceImpl implements CourseService {
     public int Delete(int[] ids) {
         return courseMapper.Delete(ids);
     }
+
+    @Override
+    public int isRepeated(Course course) {
+        return courseMapper.isRepeated(course);
+    }
 }

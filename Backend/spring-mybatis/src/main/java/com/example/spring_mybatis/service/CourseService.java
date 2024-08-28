@@ -21,4 +21,6 @@ public interface CourseService {
     int delete(Integer id);
     //批量删除
     public int Delete(int[] ids);
+    //检查课程是否存在
+    int isRepeated(Course course);
 }
