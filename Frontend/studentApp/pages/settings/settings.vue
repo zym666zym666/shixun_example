@@ -13,13 +13,14 @@
 		<view v-if="isModalVisible" class="modal-overlay">
 			<view class="modal-content">
 				<text class="modal-title">修改手机号</text>
-				<input focus="true" type="text" v-model="phone" placeholder="请输入新的手机号" />
+				<input ref="phoneInput" focus="true" type="text" v-model="phone" placeholder="请输入新的手机号" />
 				<view class="modal-buttons">
 					<button @click="confirmUpdatePhone">确认</button>
 					<button @click="hideModal">取消</button>
 				</view>
 			</view>
 		</view>
+
 	</view>
 </template>
 
@@ -32,114 +33,116 @@
 			};
 		},
 		methods: {
-		showModal() {
-			this.phone = "";
-			this.isModalVisible = true;
-			this.$nextTick(() => {
-				this.$refs.phoneInput.focus(); // 在下一次 DOM 更新后聚焦输入框
-			});
-		},
-		hideModal() {
-			this.isModalVisible = false;
-		},
-		confirmUpdatePhone() {
-			const phoneRegex = /^1[3-9]\d{9}$/; // 大陆手机号正则表达式
-			if (!phoneRegex.test(this.phone)) {
-				uni.showToast({
-					title: "手机号格式不正确",
-					icon: "none",
-					duration: 2000
+			showModal() {
+				this.phone = "";
+				this.isModalVisible = true;
+				this.$nextTick(() => {
+					this.$refs.phoneInput.focus(); // 在下一次 DOM 更新后聚焦输入框
 				});
-				return;
-			}
+			},
+			hideModal() {
+				this.isModalVisible = false;
+			},
+			confirmUpdatePhone() {
+				const phoneRegex = /^1[3-9]\d{9}$/; // 大陆手机号正则表达式
+				if (!phoneRegex.test(this.phone)) {
+					uni.showToast({
+						title: "手机号格式不正确",
+						icon: "none",
+						duration: 2000
+					});
+					return;
+				}
 
-			this.checkTel(this.phone);
-		},
-		checkTel(phone) {
-			uni.request({
-				url: 'http://127.0.0.1:8081/checkTel', // 检查手机号是否已注册的接口
-				method: 'POST',
-				data: {
-					tel: phone
-				},
-				header: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code === 200) {
-						if (res.data.data) {
+				this.checkTel(this.phone);
+			},
+			checkTel(phone) {
+				uni.request({
+					url: 'http://127.0.0.1:8081/checkTel', // 检查手机号是否已注册的接口
+					method: 'POST',
+					data: {
+						tel: phone
+					},
+					header: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					success: (res) => {
+						if (res.data.code === 200) {
+							if (res.data.data) {
+								uni.showToast({
+									title: "该手机号已注册",
+									icon: "none",
+									duration: 2000
+								});
+							} else {
+								this.updateTel();
+								// 登出
+							}
+						} else {
 							uni.showToast({
-								title: "该手机号已注册",
+								title: res.data.message || "服务端错误",
 								icon: "none",
 								duration: 2000
 							});
-						} else {
-							this.updateTel();
 						}
-					} else {
+					},
+					fail: (err) => {
 						uni.showToast({
-							title: res.data.message || "服务端错误",
+							title: "网络错误，请重试",
 							icon: "none",
 							duration: 2000
 						});
 					}
-				},
-				fail: (err) => {
-					uni.showToast({
-						title: "网络错误，请重试",
-						icon: "none",
-						duration: 2000
-					});
-				}
-			});
-		},
-		updateTel() {
-			uni.request({
-				url: 'http://127.0.0.1:8081/updateTel', // 更新手机号的接口
-				method: 'POST',
-				data: {
-					tel: this.$store.getters.tel,
-					phone: this.phone
-				},
-				header: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code === 200 && res.data.data) {
-						console.log(res.data);
-						this.$store.commit('setTel', this.tel);
-						uni.setStorageSync('userTel', this.tel);
-						this.isModalVisible = false;
+				});
+			},
+			updateTel() {
+				uni.request({
+					url: 'http://127.0.0.1:8081/updateTel', // 更新手机号的接口
+					method: 'POST',
+					data: {
+						tel: this.$store.getters.tel,
+						phone: this.phone
+					},
+					header: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					success: (res) => {
+						if (res.data.code === 200 && res.data.data) {
+							console.log(res.data);
+							this.$store.commit('setTel', this.phone);
+							uni.setStorageSync('userTel', this.phone);
+							this.isModalVisible = false;
+							uni.showToast({
+								title: "修改成功",
+								icon: "success",
+								duration: 2000
+							});
+							// uni.navigateBack();
+						} else {
+							uni.showToast({
+								title: res.data.message || "修改失败",
+								icon: "none",
+								duration: 2000
+							});
+						}
+					},
+					fail: (err) => {
 						uni.showToast({
-							title: "修改成功",
-							icon: "success",
-							duration: 2000
-						});
-					} else {
-						uni.showToast({
-							title: res.data.message || "修改失败",
+							title: "网络错误，请重试",
 							icon: "none",
 							duration: 2000
 						});
 					}
-				},
-				fail: (err) => {
-					uni.showToast({
-						title: "网络错误，请重试",
-						icon: "none",
-						duration: 2000
-					});
-				}
-			});
-		},
-		logout() {
-			this.$store.commit('setTel', '');
-			uni.removeStorageSync('userTel');
-			uni.navigateTo({
-				url: '/pages/login/login'
-			});
+				});
+			},
+			logout() {
+				this.$store.commit('setTel', '');
+				uni.removeStorageSync('userTel');
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
+			}
 		}
-	}
 	}
 </script>
 

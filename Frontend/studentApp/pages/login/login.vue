@@ -102,7 +102,8 @@
 						if (res.data.code === 200) {
 							this.$store.commit('setTel', this.tel); // 更新 Vuex store 中的 tel 值
 							uni.setStorageSync('userTel', this.tel); 
-							console.log(this.$store.getters.tel);
+							console.log('Stored tel:', this.tel);
+							// console.log(this.$store.getters.tel);
 							uni.showToast({
 								title: "登录成功",
 								icon: "none",

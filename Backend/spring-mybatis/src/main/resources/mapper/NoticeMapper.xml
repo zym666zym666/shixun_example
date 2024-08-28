@@ -28,12 +28,6 @@
     <delete id="delete" parameterType="java.lang.Integer">
         delete from t_notice where id=#{id}
     </delete>
-    <!--    查询通知-->
-    <select id="query" resultType="Notice">
-        SELECT * FROM t_notice
-        ORDER BY id
-<!--        LIMIT #{pageSize} OFFSET #{offset}-->
-    </select>
 
     <select id="showNotice">
         select *

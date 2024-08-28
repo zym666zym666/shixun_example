@@ -68,6 +68,15 @@
 
 
 		methods: {
+			tabbarSelected(e) {
+			
+			},
+			tabbarTaped(e) {
+				console.log(e.pagePath)
+				uni.switchTab({
+					url: "/" + e.pagePath
+				})
+			},
 			handleClick(item, index) {
 				this.bunk = index + 1;
 				if (!item.isOccupied) {

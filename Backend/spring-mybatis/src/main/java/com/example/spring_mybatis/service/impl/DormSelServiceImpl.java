@@ -58,5 +58,22 @@ public class DormSelServiceImpl implements DormSelService {
     @Override
     public DormSel checkOut(String phone) { return  dormSelMapper.checkOut(phone);}
 
+    @Override
+    public int isHave(String buildingId) {
+        return dormSelMapper.isHave(buildingId);
+    }
+    @Override
+    public int Delete(int[] buildingId) {
+        return dormSelMapper.Delete(buildingId);
+    }
+    @Override
+    public int setInfo(Student student){
+        return dormSelMapper.setInfo(student);
+    }
+
+    @Override
+    public int updateS(String phone, String tel) {
+        return dormSelMapper.updateS(phone,tel);
+    }
 
 }

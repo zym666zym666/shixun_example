@@ -16,4 +16,8 @@ public interface DormSelService {
     int addDorm(String buildingId);
     int deleteDorm(String buildingId);
     DormSel checkOut(String phone);
+    int isHave(String buildingId);
+    int Delete(int[] buildingId);
+    int setInfo(Student student);
+    int updateS(String phone,String tel);
 }

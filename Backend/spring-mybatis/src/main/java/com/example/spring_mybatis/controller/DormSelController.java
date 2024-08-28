@@ -16,7 +16,6 @@ import java.util.Map;
 public class DormSelController {
     @Autowired
     private DormSelService dormSelService;
-
     //入住宿舍
     @PostMapping("/stay")
     public R stay(@RequestBody DormSel dormSel){
@@ -60,8 +59,14 @@ public class DormSelController {
     //添加宿舍
     @PostMapping("api/addDorm")
     public R addDorm(String buildingId){
-        int isAdd=dormSelService.addDorm(buildingId);
-        return isAdd>0?R.success(isAdd):R.fail("操作失败");
+        int isHave=dormSelService.isHave(buildingId);
+        if(isHave==0){
+            dormSelService.addDorm(buildingId);
+            return R.success(isHave);
+        }
+        else {
+            return R.fail("宿舍已存在");
+        }
     }
 
     //删除宿舍
@@ -78,4 +83,10 @@ public class DormSelController {
         return dormSel != null ? R.fail("操作失败") : R.success(dormSel);
     }
 
+    //批量删除
+    @PostMapping("api/DeleteDorms")
+    public R Delete(int[] buildingId){
+        int row=dormSelService.Delete(buildingId);
+        return row>0 ?R.success(row):R.fail("操作失败");
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.spring_mybatis.controller;
 
+import com.example.spring_mybatis.mapper.DormSelMapper;
 import com.example.spring_mybatis.pojo.Student;
 import com.example.spring_mybatis.service.StudentService;
 import com.example.spring_mybatis.utils.MD5Util; // 引入 MD5Util 类
@@ -20,6 +21,8 @@ public class LoginController {
     // 注入业务逻辑接口层实例对象
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private DormSelMapper dormSelMapper;
 
     // 账户激活接口（注册接口）
     @PostMapping("/register")
@@ -142,6 +145,7 @@ public class LoginController {
     public R updateTel(@RequestParam String tel, @RequestParam String phone) {
         try {
             int res = studentService.updateTel(tel, phone);
+            dormSelMapper.updateS(phone,tel);
             return R.success(res);
         } catch (Exception e) {
             e.printStackTrace();

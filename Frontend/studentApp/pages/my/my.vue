@@ -98,15 +98,18 @@
 		},
 		methods: {
 			onShow() {
+				// this.$forceUpdate();
 				this.getStudentInfo();
 			},
 			getStudentInfo() {
-				console.log(this.$store.getters.tel);
+				const storedTel = uni.getStorageSync('userTel');
+				this.tel=storedTel;
+				console.log('Retrieved tel:', storedTel); // 检查是否成功读取
 				uni.request({
 					url: 'http://localhost:8081/getInfo',
 					method: 'POST',
 					data: {
-						tel: this.$store.getters.tel
+						tel: storedTel
 					},
 					header: {
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -142,18 +145,12 @@
 				});
 			},
 			settings() {
-				// uni.showToast({
-				// 	title: "登出成功",
-				// 	icon: "success",
-				// 	duration: 2000
-				// });
-				// 进行实际的登出操作，比如清除用户信息，跳转到登录页面等
 				uni.navigateTo({
 					url: "/pages/settings/settings"
 				});
 			}
 		}
-	};
+	}
 </script>
 
 <style>

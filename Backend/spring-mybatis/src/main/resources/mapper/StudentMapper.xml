@@ -24,7 +24,8 @@
     <!--    更新个人信息-->
     <insert id="datasel" parameterType="Student">
         INSERT INTO t_student (tel, name, idcard, institute, major, classes, stu_id, nation, address, image, status)
-        VALUES (#{tel}, #{name}, #{idcard}, #{institute}, #{major}, #{classes}, #{stuId}, #{nation}, #{address}, #{image}, 1)
+        VALUES (#{tel}, #{name}, #{idcard}, #{institute}, #{major}, #{classes}, #{stuId}, #{nation}, #{address},
+        #{image}, 1)
         ON DUPLICATE KEY UPDATE
         name = VALUES(name),
         idcard = VALUES(idcard),
@@ -42,45 +43,45 @@
         INSERT IGNORE INTO checkin_info (tel, `date`)
         VALUES (#{tel}, CURDATE());
     </insert>
-<!--    获取当天报道人数-->
+    <!--    获取当天报道人数-->
     <select id="getCount" resultType="int">
         SELECT COUNT(*) AS count
         FROM checkin_info
         WHERE `date` = CURDATE();
     </select>
-<!--    获取当前批次报到人数-->
+    <!--    获取当前批次报到人数-->
     <select id="getBatch" resultType="int">
         SELECT COUNT(*) AS count
         FROM checkin_info
     </select>
-<!--    获取各系人数-->
+    <!--    获取各系人数-->
     <select id="getInsCnt" resultType="map">
         SELECT institute, COUNT(*) AS student_count
         FROM t_student
         GROUP BY institute
     </select>
-<!--    获取报到比例-->
+    <!--    获取报到比例-->
     <select id="getRate" resultType="java.math.BigDecimal">
         SELECT ROUND((COUNT(CASE WHEN status = 1 THEN 1 END) * 1.0 / COUNT(*)), 4) AS ratio
         FROM t_student
     </select>
-<!--    通过手机号获取学生学号-->
+    <!--    通过手机号获取学生学号-->
     <select id="queryId" parameterType="java.lang.String">
         select id
         from t_student
         where tel=#{phone}
     </select>
-<!--    获取当日报道人数-->
-    <select id="getRen"  resultType="java.util.HashMap">
+    <!--    获取当日报道人数-->
+    <select id="getRen" resultType="java.util.HashMap">
         SELECT date_format(date, '%Y-%m-%d') AS date, COUNT(*) AS count
         FROM checkin_info
         GROUP BY date
         ORDER BY date ASC
     </select>
-<!--    修改注册手机号-->
+    <!--    修改注册手机号-->
     <update id="updateTel" parameterType="java.lang.String">
         UPDATE t_student
         SET tel = #{phone}
-        WHERE tel=#{tel}
+        WHERE tel = #{tel};
     </update>
 </mapper>

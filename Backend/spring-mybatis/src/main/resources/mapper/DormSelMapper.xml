@@ -34,7 +34,8 @@ id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的�
 
     <!--查询宿舍编号-->
     <select id="getDormId" resultType="java.lang.String">
-        select distinct building_id from dormsel;
+        select distinct building_id from dormsel
+        order by building_id ASC;
     </select>
 
     <!--查询所有宿舍门牌号-->
@@ -76,4 +77,33 @@ id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的�
     `status` = 0
     WHERE stu_phone = #{stuPhone};
     </select>
+
+    <!--查询宿舍是否存在-->
+    <select id="isHave" parameterType="java.lang.String">
+    select count(*) from dormsel
+    where building_id=#{buildingId}
+    </select>
+
+    <!--宿舍批量删除-->
+    <delete id="Delete" parameterType="int">
+        delete from dormsel
+        where building_id in
+        <foreach item="id" collection="buildingId" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--    更新宿舍学生信息-->
+    <update id="setInfo" parameterType="com.example.spring_mybatis.pojo.Student">
+        UPDATE dormsel
+        SET stu_name=#{name},stu_phone=#{tel},stu_major=#{major},stu_img=#{image}
+        WHERE stu_phone=#{tel}
+    </update>
+
+    <!--修改宿舍人手机-->
+    <update id="updateS">
+        UPDATE dormsel
+        SET stu_phone=#{phone}
+        WHERE stu_phone = #{tel};
+    </update>
 </mapper>

@@ -5,9 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.spring_mybatis.mapper.NoticeMapper;
 import com.example.spring_mybatis.pojo.Notice;
 import com.example.spring_mybatis.service.NoticeService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,14 +33,6 @@ public class NoticeSeviceImpl implements NoticeService {
         return noticeMapper.delete(id);
     }
 
-    @Override
-    public PageInfo query(Integer currentPage, Integer pageSize) {
-        System.out.println("Starting pageHelper with pageNum: " + currentPage + " and pageSize: " + pageSize);
-        Page<Notice> page = PageHelper.startPage(currentPage, pageSize);// 启动分页
-        List<Notice> notices = noticeMapper.query(); // 执行查询
-        PageInfo<Notice> noticeList = new PageInfo<>(notices);
-        return noticeList;
-    }
 
 
     @Override
