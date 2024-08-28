@@ -24,6 +24,7 @@ public class R implements Serializable {
         return ok(200,"请求成功",data);
     }
 
+
     //执行失败
     public static R fail(String msg) {
         return err(1001,"操作失败");

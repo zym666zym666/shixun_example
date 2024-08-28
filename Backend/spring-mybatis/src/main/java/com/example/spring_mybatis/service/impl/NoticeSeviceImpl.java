@@ -1,8 +1,13 @@
 package com.example.spring_mybatis.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.spring_mybatis.mapper.NoticeMapper;
 import com.example.spring_mybatis.pojo.Notice;
 import com.example.spring_mybatis.service.NoticeService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +37,14 @@ public class NoticeSeviceImpl implements NoticeService {
     }
 
     @Override
-    public List<Notice> query() {
-        return noticeMapper.query();
+    public PageInfo query(Integer currentPage, Integer pageSize) {
+        System.out.println("Starting pageHelper with pageNum: " + currentPage + " and pageSize: " + pageSize);
+        Page<Notice> page = PageHelper.startPage(currentPage, pageSize);// 启动分页
+        List<Notice> notices = noticeMapper.query(); // 执行查询
+        PageInfo<Notice> noticeList = new PageInfo<>(notices);
+        return noticeList;
     }
+
 
     @Override
     public List<Notice> getNotice(String title) {
@@ -54,5 +64,15 @@ public class NoticeSeviceImpl implements NoticeService {
     @Override
     public List<Notice> showNoticelimit() {
         return noticeMapper.showNoticelimit();
+    }
+
+    @Override
+    public int Delete(int[] ids) {
+        return noticeMapper.Delete(ids);
+    }
+
+    @Override
+    public IPage<Notice> selectPageVo(IPage<?> page, Wrapper wrapper) {
+        return noticeMapper.selectPageVo(page,wrapper);
     }
 }

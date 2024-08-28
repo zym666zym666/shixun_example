@@ -65,6 +65,7 @@
 			<artifactId>hutool-all</artifactId>
 			<version>5.5.7</version>
 		</dependency>
+		<!--分页插件坐标-->
 	</dependencies>
 
 	<build>

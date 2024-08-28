@@ -71,6 +71,11 @@ public class DormSelController {
         return isDelete>0?R.success(isDelete):R.fail("操作失败");
     }
 
-
+    // 退宿舍
+    @PostMapping("/checkOut")
+    public R checkOut( String phone) {
+        DormSel dormSel = dormSelService.checkOut(phone);
+        return dormSel != null ? R.fail("操作失败") : R.success(dormSel);
+    }
 
 }

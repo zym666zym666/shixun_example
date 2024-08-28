@@ -18,5 +18,5 @@ public interface DormSelMapper {
     List<Map<String,Object>> getAllDormId();
     int addDorm(String buildingId);
     int deleteDorm(String buildingId);
-
+    DormSel checkOut(String phone);
 }

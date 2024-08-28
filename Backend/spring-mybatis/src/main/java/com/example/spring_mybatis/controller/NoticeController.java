@@ -1,11 +1,18 @@
 package com.example.spring_mybatis.controller;
 
+import ch.qos.logback.core.util.StringUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.spring_mybatis.pojo.Notice;
+
+import com.example.spring_mybatis.pojo.QueryPageParam;
 import com.example.spring_mybatis.service.NoticeService;
 import com.example.spring_mybatis.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 @CrossOrigin
 @RestController
@@ -27,15 +34,26 @@ public class NoticeController {
         int row =noticeService.delete(id);
         return row>0?R.success(row):R.fail("操作失败");
     }
-    @GetMapping("/api/notice")
-    public R queryAll(){
-        List<Notice> noticeList=noticeService.query();
-        return noticeList.size()>0?R.success(noticeList):R.fail("操作失败");
+    @PostMapping("/api/noticeList")
+    public R queryAll(@RequestBody QueryPageParam pageParam) {
+        System.out.println(pageParam.getPageNum() + "-" + pageParam.getPageSize());
+       HashMap param = pageParam.getParam();
+        String title = (String) param.get("title");
+        System.out.println("title:" + title);
+        IPage<Notice> iPage = new Page<>(pageParam.getPageNum(),pageParam.getPageSize());
+        LambdaQueryWrapper<Notice> wrapper = new LambdaQueryWrapper<>();
+        // 如果name不为空，则添加查询条件
+        if (!StringUtil.isNullOrEmpty(title)) {
+            wrapper.like(Notice::getTitle, title);
+        }
+        IPage<Notice> pages = noticeService.selectPageVo(iPage, wrapper);
+
+        return R.success(pages);
     }
 
     //根据标题查询信息
     @GetMapping("api/getNotice")
-    public R getNotice(String title){
+    public R getNotice(@RequestParam String title){
         List<Notice> notices=noticeService.getNotice(title);
         System.out.println(title);
         return notices!=null?R.success(notices):R.fail("操作失败");
@@ -63,5 +81,13 @@ public class NoticeController {
         return notices!=null?R.success(notices):R.fail("操作失败");
     }
 
+    @PostMapping("/api/Delete")
+    public R Delete(int[] ids)
+    {
+        System.out.println(ids);
+        int row=noticeService.Delete(ids);
+        System.out.println(row);
+        return row!=0?R.success(row):R.fail("操作失败");
+    }
 
 }

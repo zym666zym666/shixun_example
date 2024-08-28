@@ -28,10 +28,13 @@
     <delete id="delete" parameterType="java.lang.Integer">
         delete from t_notice where id=#{id}
     </delete>
-<!--    查询通知-->
+    <!--    查询通知-->
     <select id="query" resultType="Notice">
-        select id,title,content,date from t_notice
+        SELECT * FROM t_notice
+        ORDER BY id
+<!--        LIMIT #{pageSize} OFFSET #{offset}-->
     </select>
+
     <select id="showNotice">
         select *
         from t_notice
@@ -50,6 +53,19 @@
     <!--根据标题查通知-->
     <select id="getNotice" resultType="Notice">
         select id,title,content,date from t_notice
-        where title=#{title}
+        where title LIKE CONCAT('%', #{title}, '%')
+    </select>
+
+<!--    批量删除-->
+    <delete id="Delete" parameterType="int">
+        delete from t_notice
+        where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectPageVo" resultType="Notice">
+    select * from t_notice ${ew.customSqlSegment}
     </select>
 </mapper>

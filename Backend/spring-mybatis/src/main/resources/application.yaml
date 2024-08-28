@@ -14,6 +14,7 @@ mybatis-plus:
   type-aliases-package: com.example.spring_mybatis.pojo
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 files:
     upload:
       path: './uploads/' # 文件上传路径

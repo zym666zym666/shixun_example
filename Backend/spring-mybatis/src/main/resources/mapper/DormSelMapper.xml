@@ -17,7 +17,7 @@ id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的�
     <!--查询学生信息-->
     <select id="getMessage" parameterType="java.lang.String">
         select * from t_student
-        where phone=#{phone}
+        where tel=#{phone}
     </select>
 
     <!--查询宿舍信息，显示在前端-->
@@ -65,4 +65,15 @@ id:标识查询标签，唯一不能重复，取值与StudentMapper接口中的�
         DELETE FROM dormsel WHERE  building_id=#{buildingId}
     </delete>
 
+    <!--根据电话号码退宿舍-->
+    <select id="checkOut" parameterType="java.lang.String">
+    UPDATE dormsel
+    SET stu_phone = NULL,
+    stu_name = NULL,
+    stu_major = NULL,
+    stu_nation = NULL,
+    stu_img = NULL,
+    `status` = 0
+    WHERE stu_phone = #{stuPhone};
+    </select>
 </mapper>

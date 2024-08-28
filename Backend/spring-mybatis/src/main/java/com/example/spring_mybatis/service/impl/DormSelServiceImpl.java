@@ -55,7 +55,8 @@ public class DormSelServiceImpl implements DormSelService {
         return dormSelMapper.deleteDorm(buildingId);
     }
 
-
+    @Override
+    public DormSel checkOut(String phone) { return  dormSelMapper.checkOut(phone);}
 
 
 }
