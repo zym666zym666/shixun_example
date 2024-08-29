@@ -44,8 +44,12 @@
 		<text class="message">最新消息</text>
 		<view class="message-box">
 			<view class="msg-content" v-for="notice in notices" :key="notice.id" @click="Tos(notice.id)">
-				<text class="msg-title">{{notice.title}}</text>
-				<text class="msg-date">{{notice.date}}</text>
+				<view class="msg-title">
+					<text>{{notice.title}}</text>
+				</view>
+				<view class="msg-date">
+					<text>{{notice.date}}</text>
+				</view>
 			</view>
 
 		</view>
@@ -73,6 +77,25 @@
 		},
 		onLoad() {
 			this.Autodisp();
+			this.$nextTick(() => {
+				const msgBox = this.$el.querySelector('.message-box');
+				if (msgBox) {
+					msgBox.style.display = 'none'; // 设置为 none
+					msgBox.offsetHeight; // 触发重绘
+					msgBox.style.display = 'block'; // 重新显示
+				}
+			});
+		},
+		mounted() {
+			this.Autodisp();
+			this.$nextTick(() => {
+				const msgBox = this.$el.querySelector('.message-box');
+				if (msgBox) {
+					msgBox.style.display = 'none'; // 设置为 none
+					msgBox.offsetHeight; // 触发重绘
+					msgBox.style.display = 'block'; // 重新显示
+				}
+			});
 		},
 		methods: {
 			toIntroduction: function() {
@@ -133,7 +156,7 @@
 					url: "/pages/navigation/navigation"
 				})
 			},
-			toCourses: function(){
+			toCourses: function() {
 				uni.navigateTo({
 					url: "/pages/courses/courses"
 				})
@@ -231,23 +254,60 @@
 	}
 
 	.msg-content {
+		/* display: flex; */
 		margin-top: 10rpx;
 		width: 100%;
 		height: 90rpx;
 		border-bottom: solid #d5d5d5 1rpx;
+		position: relative;
+		
 
 	}
 
 	.msg-title {
-		font-size: 35rpx;
-		line-height: 90rpx;
+		position: absolute;
+		width: 350rpx;
+		height: 60rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 40%;
+		white-space: nowrap;
+		margin-top: 20rpx;
+		margin-left: 10rpx;
+		
+	}
+
+	.msg-title text {
+		white-space: nowrap;
+		/* display: inline-block; */
+		vertical-align: middle;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 20%;
 	}
 
 	.msg-date {
 		display: inline-block;
-		float: right;
+		
+		align-items: center; 
+		/* vertical-align: middle; */
+		/* margin-left: 10px; */
+		width: 200rpx;
+		height: 60rpx;
+		position: absolute;
 		margin-top: 20rpx;
-		margin-right: 20rpx;
+		margin-left: 500rpx;
+		
+
+	}
+
+	.msg-date text {
+		white-space: nowrap;
+		/* display: inline-block; */
+		vertical-align: middle;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 20%;
 	}
 
 	/deep/.uni-tabbar__icon img {

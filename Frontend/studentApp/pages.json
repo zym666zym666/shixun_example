@@ -2,110 +2,112 @@
 	"pages": [{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/login/login",
-			"style": {}
+			"style": {"navigationBarTitleText": "重庆大学"}
 		},
 		{
 			"path": "pages/register/register",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/setpwd/setpwd",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/datasel/datasel",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/dorm/dorm",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/dormsel/dormsel",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/course/course",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/mycourse/mycourse",
-			"style": {}
+			"style": {"navigationBarTitleText": "重庆大学"}
 		},
 		{
 			"path": "pages/my/my",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "重庆大学"
+			}
 		},
 		{
 			"path": "pages/message/message",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/specificinformation/specificinformation",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/onlineService/onlineService",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/settings/settings",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 
 		},
 		{
 			"path": "pages/reporting/reporting",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/navigation/navigation",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/courses/courses",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/course_informs/course_informs",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		},
 		{
 			"path": "pages/introduction/introduction",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "重庆大学"
 			}
 		}
 	],

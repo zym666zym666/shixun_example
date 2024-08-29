@@ -17,7 +17,7 @@
 	<button class="map-service-button" @click="openWebPage">CQU地图</button>
 	<!-- 平安重大公众号 -->
 	<button class="cqu-service-button" @click="openModal">预约进校</button>
-	<div class="modal" v-if="isModalOpen">
+	<div class="modal_" v-if="isModalOpen">
 		<div class="modal-content">
 			<!-- 关闭按钮，点击时调用closeModal方法 -->
 			<span class="close" @click="closeModal">&times;</span>
@@ -139,7 +139,7 @@
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	}
 
-	.modal {
+	.modal_ {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -153,7 +153,7 @@
 		background-color: rgba(0, 0, 0, 0.5);
 	}
 
-	.modal img {
+	.modal_ img {
 		max-width: 100%;
 		/* 确保图片在模态框内部适应宽度 */
 		max-height: 80vh;
