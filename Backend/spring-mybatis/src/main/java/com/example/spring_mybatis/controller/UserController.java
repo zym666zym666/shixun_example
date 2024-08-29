@@ -47,10 +47,7 @@ public class UserController {
         // 校验验证码
         boolean check = lineCaptcha.verify(map.get("code"));
         if (check) {
-            // 对用户输入的密码进行 MD5 加密
-            String encryptedPassword = MD5Util.encrypt(map.get("password"));
-            // 使用加密后的密码进行登录验证
-            Users users = userService.login(map.get("username"), encryptedPassword);
+            Users users = userService.login(map.get("username"), map.get("password"));
             return users != null ? R.success(users) : R.fail("用户名或密码错误");
         } else {
             return R.fail("验证码校验失败");

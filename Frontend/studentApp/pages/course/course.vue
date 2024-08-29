@@ -103,10 +103,18 @@
 									title: "选课成功"
 								})
 								this.Refresh();
-							} else {
+							} else if(res.data.data==2){
 								uni.showToast({
 									icon: "error",
-									title: "已选课成功，请勿重复选课"
+									title: "课程已满，请选择其他课程"
+								})
+								this.Refresh();
+							}
+							else
+							{
+								uni.showToast({
+									icon: "error",
+									title: "已选择该课程，请勿重复选课"
 								})
 								this.Refresh();
 							}

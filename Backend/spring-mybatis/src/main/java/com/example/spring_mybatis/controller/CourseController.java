@@ -38,23 +38,31 @@ public class CourseController {
         System.out.println(phone+" "+courseId);
         //根据电话号码查询学生id,并将其保存在res中
         Integer res=studentService.queryId(phone);
+        int rst=courseService.isCourseFull(courseId);
         //当学生id非空，即学生存在时
         if(res!=null)
         {
-            //查询学生是否选择该门课程
-            int ret=courseStudentService.isSelectTheCourse(courseId,res);
-            //学生未选择该门课程时
-            if(ret==0)
+            if(rst==1)
             {
-                //增加课程选课人数
-                courseService.courseInsert(courseId);
-                //记录学生的选课信息
-                courseStudentService.courseInsert(courseId,res);
-                return R.success(1);
+                //查询学生是否选择该门课程
+                int ret=courseStudentService.isSelectTheCourse(courseId,res);
+                //学生未选择该门课程时
+                if(ret==0)
+                {
+                    //增加课程选课人数
+                    courseService.courseInsert(courseId);
+                    //记录学生的选课信息
+                    courseStudentService.courseInsert(courseId,res);
+                    return R.success(1);
+                }
+                else
+                {
+                    return R.success(0);
+                }
             }
             else
             {
-                return R.success(0);
+                return R.success(2);
             }
         }
         return R.fail("操作失败");
