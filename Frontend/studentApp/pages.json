@@ -91,6 +91,18 @@
 			}
 		},
 		{
+			"path": "pages/courses/courses",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/course_informs/course_informs",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/introduction/introduction",
 			"style": {
 				"navigationBarTitleText": ""

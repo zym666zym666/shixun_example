@@ -2,11 +2,11 @@
 	<view class="settings-container">
 		<text class="settings-title">设置</text>
 		<view class="settings-item">
-			<button class="update-phone-btn" @click="showModal">修改手机号</button>
+			<button class="update-phone-btn" @click="showModal">修改注册手机号</button>
 		</view>
 		<view class="settings-item">
 			<!-- 绑定点击事件到 logout 方法 -->
-			<button class="logout-btn" @click="logout">登出</button>
+			<button class="logout-btn" @click="logout">返回登录页</button>
 		</view>
 
 		<!-- 弹窗 -->
@@ -76,7 +76,6 @@
 								});
 							} else {
 								this.updateTel();
-								// 登出
 							}
 						} else {
 							uni.showToast({
@@ -117,7 +116,9 @@
 								icon: "success",
 								duration: 2000
 							});
-							// uni.navigateBack();
+							uni.switchTab({
+								url: "/pages/my/my"
+							})
 						} else {
 							uni.showToast({
 								title: res.data.message || "修改失败",
@@ -182,22 +183,27 @@
 		color: #555;
 	}
 
-	.update-phone-btn,
-	.logout-btn {
-		padding: 8px 20px;
-		background-color: #007aff;
-		color: #ffffff;
-		border: none;
-		width: 100%;
-		border-radius: 4px;
-		justify-content: center;
-		/* 居中对齐 */
-		cursor: pointer;
-		font-size: 16px;
+	.update-phone-btn {
+		font-weight: bold;
+		background-color: #ffffff;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
 
+
 	.logout-btn {
-		background-color: #e64340;
+		padding: 8px 20px;
+		background-color: #ffffff;
+		font-family: Arial, sans-serif;
+		color: #151515;
+		border: none;
+		width: 55%;
+		border-radius: 5px;
+		font-weight: bold;
+		justify-content: center;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		/* 居中对齐 */
+		cursor: pointer;
+		font-size: 18px;
 	}
 
 	.modal-overlay {

@@ -8,10 +8,12 @@ import com.example.spring_mybatis.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class CourseController {
     //实例化CourseService
     @Autowired
@@ -142,5 +144,17 @@ public class CourseController {
     {
         int row=courseService.Delete(ids);
         return row>0?R.success(row):R.fail("操作失败");
+    }
+    @PostMapping("/searchCourse")
+    public R searchCourse (Integer coursepage){
+        List<Course> courses= courseService.searchCourse(coursepage);
+        return courses!=null?R.success(courses):R.fail("操作失败");
+    }
+
+    @PostMapping("/idSearch")
+    public R idSearch (@RequestParam int id){
+        List<Map<String,Object>> res= courseService.idSearch(id);
+//        HashMap<String,Object> map = new HashMap<>();
+        return res!=null?R.success(res):R.fail("操作失败");
     }
 }

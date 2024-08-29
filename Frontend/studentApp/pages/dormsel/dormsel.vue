@@ -16,11 +16,11 @@
 						<text id="one">专业：{{item.major}}</text>
 						<text id="one">籍贯：{{item.nation}}</text>
 					</view>
-					
+					<view v-if="item.isOccupied && item.phone === stuPhone" class="checkout-btn">
+						<button @click="handleCheckout(item)">退房</button>
+					</view>
 				</view>
-				<view v-if="item.isOccupied && item.phone === stuPhone" class="checkout-btn">
-					<button @click="handleCheckout(item)">退房</button>
-				</view>
+				
 			</view>
 		</view>
 
@@ -401,20 +401,32 @@
 		margin-top: 20px;
 	}
 	.checkout-btn {
-	    display: flex;
+	    display: inline-flex;
 	    justify-content: center;
 	    align-items: center;
-	    margin-top: 100px; /* 缩小按钮与上方内容的间距 */
-		margin-right: 2%;
+		width: 80px;
+		margin-bottom: 30px;
+		margin-top: 0;
+		margin-left:180px ;
 	}
 	
 	.checkout-btn button {
+		text-align: center;
+		display: inline-flex;
+		align-items: center;
 	    background-color: #f76c6c; /* 红色背景 */
 	    color: white; /* 白色字体 */
 	    border: none;
+		margin-bottom: 30px;
+		margin-right: 7px;
+		justify-content: center;
+		align-items: center;
+		height: 35px;
+		width: 80px;
 	    border-radius: 3px; /* 边角略微圆滑 */
 	    padding: 5px 10px; /* 缩小内边距 */
-	    font-size: 12px; /* 缩小字体 */
+	    font-size: 14px; /* 缩小字体 */
+		font-weight: bold;
 	    cursor: pointer;
 	    transition: background-color 0.3s, transform 0.2s;
 	}

@@ -93,14 +93,12 @@
 				return "";
 			}
 		},
-		mounted() {
+		onLoad() {
+			console.log(uni.getStorageSync("userTel"));
 			this.getStudentInfo();
+			// this.onShow();
 		},
 		methods: {
-			onShow() {
-				// this.$forceUpdate();
-				this.getStudentInfo();
-			},
 			getStudentInfo() {
 				const storedTel = uni.getStorageSync('userTel');
 				this.tel=storedTel;

@@ -15,7 +15,7 @@ const store = createStore({
 	mutations: {
 		setTel(state, tel) {
 			state.tel = tel;
-			uni.setStorageSync('userTel', tel); 
+			uni.setStorageSync('userTel', tel);
 		}
 	},
 	getters: {
@@ -24,6 +24,7 @@ const store = createStore({
 		}
 	}
 });
+                        
 export function createApp() {
 	const app = createSSRApp(App)
 	app.use(store); // 使用 Vuex store

@@ -3,6 +3,7 @@ package com.example.spring_mybatis.service;
 import com.example.spring_mybatis.pojo.Course;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CourseService {
     public List<Course> queryall();
@@ -23,4 +24,8 @@ public interface CourseService {
     public int Delete(int[] ids);
     //检查课程是否存在
     int isRepeated(Course course);
+
+    public List<Course>  searchCourse(Integer coursepage);
+
+    public List<Map<String,Object>>  idSearch(int id);
 }

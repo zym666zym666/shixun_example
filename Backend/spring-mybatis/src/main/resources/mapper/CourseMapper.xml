@@ -71,4 +71,15 @@
         from course
         where course_name=#{courseName} and course_teacher=#{courseTeacher} and course_place=#{coursePlace} and course_capacity=#{courseCapacity} and course_begin_time=#{courseBeginTime} and course_end_time=#{courseEndTime}
     </select>
+
+    <select id="searchCourse" parameterType="Course" resultType="Course">
+        SELECT * FROM course
+        ORDER BY course_id
+        LIMIT 4 OFFSET #{offset}
+    </select>
+    <select id="idSearch" resultType="java.util.Map">
+        SELECT course_name,course_teacher,course_begin_time,course_end_time,course_place
+        FROM course
+        WHERE course_id=#{id}
+    </select>
 </mapper>

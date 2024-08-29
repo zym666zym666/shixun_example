@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -70,4 +71,14 @@ public class CourseServiceImpl implements CourseService {
     public int isRepeated(Course course) {
         return courseMapper.isRepeated(course);
     }
+    public List<Course> searchCourse(Integer coursepage) {
+        int offset = (coursepage - 1) * 4;
+        return courseMapper.searchCourse(offset);
+    }
+
+    @Override
+    public List<Map<String,Object>>  idSearch(int id) {
+        return courseMapper.idSearch(id);
+    }
+
 }

@@ -20,9 +20,9 @@
 				<image src="../../static/课程.png"></image>
 				<text>我的课程</text>
 			</view>
-			<view class="nav-item">
-				<image src="../../static/预约.png"></image>
-				<text>体检预约</text>
+			<view class="nav-item" @click="toCourses()">
+				<image src="../../static/课程表.png"></image>
+				<text>课程介绍</text>
 			</view>
 			<view class="nav-item" @click="toNavigate()">
 				<image src="../../static/导航图标.png"></image>
@@ -133,6 +133,12 @@
 					url: "/pages/navigation/navigation"
 				})
 			},
+			toCourses: function(){
+				uni.navigateTo({
+					url: "/pages/courses/courses"
+				})
+			},
+
 			toService: function() {
 				uni.navigateTo({
 					url: "/pages/onlineService/onlineService"

@@ -5,6 +5,8 @@ import com.example.spring_mybatis.pojo.Course;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface CourseMapper {
     //查询所有课程信息
@@ -31,4 +33,10 @@ public interface CourseMapper {
     public int Delete(int[] ids);
     //检查课程是否存在
     public int isRepeated(Course course);
+
+    //查询课程库
+    public List<Course> searchCourse(Integer offset);
+    //更新课程介绍
+    public  List<Map<String,Object>> idSearch(int id);
+
 }
